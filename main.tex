@@ -1,0 +1,49 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage[hidelinks=true]{hyperref}
+\usepackage[
+	backend=biber,
+	style=ieee,
+	texencoding=utf8,
+	bibencoding=utf8,
+	sortlocale=hu
+]{biblatex}
+\usepackage{csquotes}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{microtype}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\addbibresource{gts2012.bib}
+
+\DeclareQuoteStyle{magyar}%
+  {\quotedblbase}
+  [\guillemotleft]
+  {\textquotedblright}[0.05em]
+  {\guillemotright}
+  [\guillemotleft]
+  {\guillemotleft}
+
+\addbibresource{biblio.bib}
+
+\sloppy
+\frenchspacing
+\onehalfspacing
+\setlist{itemsep=0em}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Tétel}[section]
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definíció} 
+
+\newcommand{\clsname}[1]{\texttt{#1}}
+ 
+\begin{document}
+
+\newpage
+\printbibliography
+
+\end{document}

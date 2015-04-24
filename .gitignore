@@ -1,0 +1,16 @@
+# latex
+*.pdf
+*.aux
+*.ps
+*.dvi
+*.log
+
+# biblatex
+*.bcf
+*.run.xml
+*.bbl
+*.blg
+
+# dunno, really, maybe texworks
+*.out
+*.synctex.gz
