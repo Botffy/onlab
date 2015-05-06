@@ -1,4 +1,5 @@
 \documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm, bindingoffset=1.25cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[magyar]{babel}
 \usepackage[hidelinks=true]{hyperref}
@@ -14,10 +15,10 @@
 \usepackage{enumitem}
 \usepackage{titlesec}
 \usepackage{microtype}
+\usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
-
-\addbibresource{gts2012.bib}
+\usepackage{enumitem}
 
 \DeclareQuoteStyle{magyar}%
   {\quotedblbase}
@@ -32,16 +33,18 @@
 \sloppy
 \frenchspacing
 \onehalfspacing
-\setlist{itemsep=0em}
+\setlist{nosep}
 
 \theoremstyle{plain}
-\newtheorem{thm}{Tétel}[section]
-\theoremstyle{definition}
-\newtheorem{defn}[thm]{Definíció} 
+\newtheorem*{defn}{Definíció} 
 
-\newcommand{\clsname}[1]{\texttt{#1}}
+\newcommand{\cls}[1]{\texttt{#1}}
  
 \begin{document}
+
+\section{Programozási nyelvek}
+\label{sec:proglang}
+\input{parts/proglang.tex}
 
 \newpage
 \printbibliography

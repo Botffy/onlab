@@ -4,6 +4,7 @@
 *.ps
 *.dvi
 *.log
+*.toc
 
 # biblatex
 *.bcf

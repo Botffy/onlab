@@ -1,0 +1,88 @@
+A programozási nyelv algoritmusok leírására szolgáló formális jelölésrendszer, amelyet emberek és számítógépek is értelmezni tudnak.
+A programozási nyelv szolgálhat ember és gép közötti kommunikáció eszközeként, lehetővé téve a programozónak, hogy a feladatot megoldó algoritmust a számítógép számára érthető módon megfogalmazza.
+De a programozási nyelv kommunikációs eszköz lehet ember és ember között is, hiszen a megírt programot a programozón kívül mások is olvasni fogják majd, akár mert javítaniuk kell a programon, akár mert tovább akarják fejleszteni, akár mert tanulni akarnak belőle.
+
+
+\subsection{Történeti áttekintés}
+Az embernek és a gépnek a közös nyelvvel szemben támasztott igényei jelentősen eltérnek.
+Kezdetben, a számítógépek megjelenésekor egyértelműen a gépek igényei voltak előtérben: a programozónak ténylegesen a gép nyelvén kellett beszélnie, \textbf{gépi kód}ban kellett közölnie a gondolatait, vagyis ténylegesen bináris számok sorozataként kellett megírnia a programját, ahol minden szám egy-egy gépi utasítást, illetve az utasítás operandusaiként szolgáló memóriacímeket jelölte.
+Ez nagyon távol áll az emberi gondolkodástól, a természetes nyelven kifejezett algoritmustól: a program lefordítása a gép nyelvére a programozó igen nehéz és munkaigényes feladata volt, a program olvasása pedig hasonlóan nehéz.
+
+Az ember-orientált nyelvek kialakulásának első lépése a csak embereknek szánt programleíró jelölésrendszerek megjelenése volt: Konrad Zuse \textit{Plankalkül}je, Neumann János és Herman Goldstine programleíró folyamatábrái, Currie lambda-kalkulusa voltak az első olyan rendszerek, amelyek lehetővé tették algoritmusok formális leírását.
+Érdemes megjegyezni, hogy bár a matematika nagyon fejlett eszköztárat épített ki statikus struktúrák leírására, az algoritmusokat egészen addig természetes nyelven adták meg\cite{KnuthTrabbPardo}.
+
+A negyvenes évek végén jelentek meg az első \textbf{assembly-szintű nyelvek}, ahol bináris számok helyett a programozó már rövid nevekkel, mnemonikokkal hivatkozhatott egy gépi utasításra, és konkrét memóriacímek helyett már azonosítókkal hivatkozhatott változókra.
+Az így leírt programot táblázatok segítségével könnyű átírni gépi kódra, és ez a fordítási folyamat könnyen automatizálható is: így jelentek meg az assemblerek, az első fordítóprogramok.
+Ez volt at első lépés az ember-orientált nyelvek kifejlődése felé: a programozóknak nem kellett többé numerikus utasításkódokat észben tartaniuk vagy memóriacímeket számolniuk, sőt, a fordítóprogram már képes volt bizonyos hibákat felderíteni a kapott programban. És bár az assembly-szintű nyelvekben eleinte a gépi utasítások és az assembly mnemonikok között egy-egy kapcsolat volt, de hamarosan megjelentek az első ,,makrók'', azaz makróutasítások (vagyis szó szeint ,,óriásutasítások'') is,  amelyek több gépi utasításból álló sorozatokat helyettesítettek.
+Megjelentek az első szubrutinkönyvtárak is, amelyek lehetővé tették a programozó számára a magasabb absztrakciós szinten való gondolkodást.
+
+Az ilyen korai \textit{autocoding} technikák fejlődésével alakultak ki a \textbf{magasszintű nyelvek}, melyeket architektúrafüggetlenség, a magas absztrakciós szint biztosítása, az assemblyhez képest rövidebb, áttekinthetőbb szerkezetű programok írásának lehetősége jellemez, és az, hogy a nyelv közelebb áll az emberi nyelvhez.
+%Az első sikeres magasszintű nyelv a FORTRAN volt, tervezési céljai közül a tömörség és a gyors elsajátíthatóság voltak a lefontosabbak.
+Fejlődésükben katalizátorként hatott Noam Chomsky generatív nyelvelmélete, melynek alapján viszonylag komplex nyelvtani struktúrákat hatékonyan felismerő és gépi nyelvre fordító algoritmusokat lehetett kidolgozni.
+
+A magasszintű nyelvek kifejlesztésének motivációja a programozói termelékenység növelése volt\cite{Backus78}, a programozók körében mégis sokáig érezhető volt egyfajta ellenérzés a magasszintű nyelvekkel szemben, mondván, hogy a magasszintű nyelvek emberorientáltsága a \textit{hatékonyság} és a \textit{kreativitás} rovására megy\cite[12.~fejezet]{MythManMonth}.
+A számítógépek teljesítményének fejlődésével és az egyre szofisztikáltabb fordítóprogramok megjelenésével ezek a kritikák háttérbe szorultak ugyan, de ezzel párhuzamosan egyre magasabb szintű, egyre emberorientáltabb programozási nyelvek jelentek meg, melyekkel szemben a korábbi magasszintű nyelvek kedvelői fogalmaztak meg hasonló kritikákat.
+A \textit{magasszintű nyelv} kifejezés így egyre magasabb szintű nyelvekre utal: az első magasszintű nyelveket egy mai programozó már jórészt alacsonyszintűnek tekinti.
+A ma programozója számára ,,túl magas'' szintű programozási nyelvek például a programkódot automatikusan generáló szoftvertervezési eszközök; ezekkel szemben a mai programozók hasonlóan a hatékonyságot és a kreativitást féltik, mint a hatvanas évek programozói a magasszintű nyelvektől.\cite{Veto}
+
+
+\subsection{Fogalmak}
+A nyelv \textbf{szintaxis}a azon szabályok halmaza, amelyek megadják a nyelven írható összes formailag helyes programot. A szintaxis megadható formális környezetfüggetlen%
+\footnote{
+	Bizonyos programozási nyelvek szintaxisát környezetfüggőnek mondják, híres példa erre a C++. Definícióink azonban határozottabbak és egyértelműbbek lesznek, ha a szintaxist mindig környezetfüggetlennek tekintjük, és a környezetfüggő elemeket a statikus szemantika hatáskörébe soroljuk; ráadásul ez a megközelítés jól tükrözi a fordítóprogramok működését.
+}
+nyelvtannal, ekkor a nyelv szintaktikailag helyes programjainak halmaza a nyelvtan által generált mondatok halmaza, $\mathbb{M}_\mathcal{L}$. Egy ilyen mondat levezetési fáját szintaxisfának nevezzük.
+Megkülönböztethetjük a \textit{felszíni} és \textit{absztrakt} szintaxist: míg a felszíni szintaxis szabályai tényleges szövegekkel, karakterláncokkal operálnak, és ezekről döntik el, hogy alkothatnak-e formailag helyes programot; addig az absztrakt szintaxis szabályai a program ,,mélystruktúrájával'' foglalkoznak, és nem törődnek azzal, hogy egy absztrakt nyelvi elemnek milyenek a felszíni megnyilvánulásai, lexikális tulajdonságai.
+Az absztrakt szintaxishoz \textbf{lexikális szabályok}at rendelve felszíni szintaxist kapunk.
+%A programozási nyelvek szintaxisát a gyakorlatban rendszerint a Backus-Naur formát használva adják meg, amely könnyen írható és olvasható emberek és gépek számára is.
+
+A nyelv \textbf{szemantiká}ja a formálisan helyes mondatok jelentését megadó szabályok összessége.
+Megkülönböztetjük a \textit{statikus szemantiká}t és a \textit{dinamikus szemantiká}t: a statikus szemantika a programok futtatás előtti viselkedésével, míg a dinamikus szemantika a program futásidejű viselkedésével foglalkozik.
+A statikus szemantika szabályai a formailag helyes programok halmazát tovább szűkitik egy $\mathbb{P}_\mathcal{L} \subseteq \mathbb{M}_\mathcal{L}$ halmazra, amelyet az \textit{érvényes programok} halmazának nevezünk: a gyakorlatban ezek azok a programok, amelyeket a fordítóprogram hiba nélkül elfogad.
+A dinamikus szemantika szabályai minden érvényes programhoz megadják a program pontos futásidejű viselkedését.
+
+Az absztrakt szintaxis elemeit \textbf{programkonstruktor}oknak, a programkonstruktorokat és a hozzájuk kapcsolódó szemantikai szabályokat együttesen pedig \textbf{nyelvi elemek}nek nevezzük.
+Ezek azok az alapvető építőelemek amelyeket használva a programozó felépítheti programját.
+
+Bizonyos elemhalmazokról igazolható, hogy ha ezeket tartalmazza egy nyelv, akkor a nyelv \textbf{univerzális}, más néven \textbf{Turing-teljes}, vagyis a nyelvvel szimulálható egy Turing-gép, ami azt jelenti, hogy minden lehetséges algoritmus kifejezhető csak az adott elemeket használva.
+Procedurális nyelvek esetében történelmi és kényelmi okokból a \textit{szekvencia}, az \textit{elágazás} és a \textit{ciklus} halmazának meglétét szokás a nyelv univerzalitását biztosítónak tekinteni: ha egy nyelvben ez a három nyelvi elem létezik, akkor az a nyelv biztosan univerzális\cite{Fothi}.
+
+\bigskip
+
+\noindent A fentiek alapján formális definíciót is adhatunk a programozási nyelv fogalmára:
+\begin{defn}[Programozási nyelv\cite{Felleisen90}]
+	Egy $\mathcal{L}$ programozási nyelvet meghatározza az $\mathcal{L} = (
+		\mathbb{M}_\mathcal{L},
+		\mathbb{P}_\mathcal{L},
+		eval_\mathcal{L}
+	)$ rendezett hármas, ahol
+	\begin{itemize}
+		\item $\mathbb{M}_\mathcal{L}$ a nyelv mondatainak, a nyelv $\mathbb{K}_\mathcal{L} = \{K_1 \ldots K_n\}$ programkonstruktoraiból szabadon generált absztrakt szintaxisfák halmaza.
+		\item $\mathbb{P}_\mathcal{L} \subseteq \mathbb{M}_\mathcal{L}, \mathbb{P}_\mathcal{L} \not= \emptyset$, az $\mathcal{L}$-beli programok halmaza.
+		\item $eval_{\mathcal{L}}$ a $\mathbb{P}_\mathcal{L}$ felett értelmezett predikátum, a nyelv dinamikus szemantikája, amely akkor igaz, ha a program elvégzi a feladatát%
+		\footnote{
+Felleisen $eval_\mathcal{L}$-t olyan predikátumként definiálja, ami akkor igaz, ha a program terminál\cite{Felleisen90}, ezzel  definíciója a lehető legáltalánosabb. Ezt túl megengedőnek érzem, ezért választottam ezt a homályos, ám intuitív meghatározást. Ennek pontosabb definiálására egy mód lehet a programok (feladat, program) párként való megadása.
+		}.
+	\end{itemize}
+\end{defn}
+
+\begin{defn}[Konzervatív kiterjesztés]
+	Egy $\mathcal{L}$ nyelv $\{K_1 \ldots K_n\}$ elemekkel való konzervatív kiterjesztése egy $\mathcal{L}'$ nyelvnek, ha
+	$ \{K_1 \ldots K_n\} \cap \mathbb{K}_{\mathcal{L}'} = \emptyset$,
+	$\mathbb{K}_\mathcal{L} = \mathbb{K}_{\mathcal{L}'} \cup \{K_1 \ldots K_n\}$,
+	$\mathbb{M}_{\mathcal{L}'} \subset \mathbb{M}_\mathcal{L}$, $\mathbb{P}_{\mathcal{L}'} \subset \mathbb{P}_\mathcal{L}$, és $ \forall P \in \mathbb{P}_{\mathcal{L}'}: eval_{\mathcal{L}'}(P) = eval_\mathcal{L}(P)$. Ekkor $\mathcal{L}'$-t $\mathcal{L}$ leszűkítésének mondjuk.
+
+	\normalfont Vagyis $\mathcal{L}$-t úgy kapjuk, hogy $\mathcal{L}'$-höz hozzáadunk pár új nyelvi elemet, de minden, a régi nyelven írt program a kiterjesztett nyelvben is program, és ezek futásidejű viselkedése sem változik.
+
+	\normalfont A konzervatív kiterjesztésre a $\mathcal{L} = \mathcal{L}' + \{K_1 \ldots K_n\}$ jelölést, míg a leszűkítésre a $\mathcal{L}' = \mathcal{L} \setminus \{K_1 \ldots K_n\}$ jelölést használjuk.
+\end{defn}
+
+
+\begin{defn}[Nyelvhasználat]
+Azt mondjuk, hogy egy $K$ programkonstruktor nem része egy programozó nyelvhasználatának, ha programjaiban soha nem jelenik meg $K$.
+Ekkor a programozó által használt $\mathcal{L}'$ nyelv az ideális $\mathcal{L}$ nyelv leszűkítése, $\mathcal{L}' = \mathcal{L} \setminus \{K\}$.
+
+\normalfont Egy programozó nyelvhasználatából egy nyelvi elem hiányozhat technikai megfontolásokból (mert ,,nem hatékony''), mert a használata nem illendő (jó példa erre a \cls{goto} utasítás, ami ugyan a legtöbb nyelvben máig létezik, még olyan modern nyelvekben is, mint a Ruby, de használata a magasszintű programozásban teljesen eltűnt), vagy akár mert nem tud az adott nyelvi elem létezéséről.
+Naivnak tűnhet a feltételezés, hogy egy aktív és képzett programozó nem tud egy nyelvi elemről, de gondoljunk bele, hogy egy nyelv standard könyvtárának függvényei is nyelvi elemek; másrészt a modern programozási nyelvek gyakran nagyon komplexek, emberek számára nehezen megismerhetőek a maguk teljességében.
+Én magam csak a múlt év őszén tudtam meg, hogy a Javában létezik konstruktordelegáció: az általam használt Java azóta sokkal jobb minőségű, mint azelőtt.
+\end{defn}
