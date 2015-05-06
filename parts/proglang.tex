@@ -50,12 +50,12 @@ Procedurális nyelvek esetében történelmi és kényelmi okokból a \textit{sz
 \bigskip
 
 \noindent A fentiek alapján formális definíciót is adhatunk a programozási nyelv fogalmára:
-\begin{defn}[Programozási nyelv\cite{Felleisen90}]
-	Egy $\mathcal{L}$ programozási nyelvet meghatározza az $\mathcal{L} = (
+\begin{defn}[Programozási nyelv\protect{\cite[3.1~definíció]{Felleisen90}}]
+	Egy $\mathcal{L}$ programozási nyelv megadható az $\mathcal{L} = (
 		\mathbb{M}_\mathcal{L},
 		\mathbb{P}_\mathcal{L},
 		eval_\mathcal{L}
-	)$ rendezett hármas, ahol
+	)$ rendezett hármassal, ahol
 	\begin{itemize}
 		\item $\mathbb{M}_\mathcal{L}$ a nyelv mondatainak, a nyelv $\mathbb{K}_\mathcal{L} = \{K_1 \ldots K_n\}$ programkonstruktoraiból szabadon generált absztrakt szintaxisfák halmaza.
 		\item $\mathbb{P}_\mathcal{L} \subseteq \mathbb{M}_\mathcal{L}, \mathbb{P}_\mathcal{L} \not= \emptyset$, az $\mathcal{L}$-beli programok halmaza.
@@ -66,7 +66,7 @@ Felleisen $eval_\mathcal{L}$-t olyan predikátumként definiálja, ami akkor iga
 	\end{itemize}
 \end{defn}
 
-\begin{defn}[Konzervatív kiterjesztés]
+\begin{defn}[Konzervatív kiterjesztés\protect{\cite[3.2~definíció]{Felleisen90}}]
 	Egy $\mathcal{L}$ nyelv $\{K_1 \ldots K_n\}$ elemekkel való konzervatív kiterjesztése egy $\mathcal{L}'$ nyelvnek, ha
 	$ \{K_1 \ldots K_n\} \cap \mathbb{K}_{\mathcal{L}'} = \emptyset$,
 	$\mathbb{K}_\mathcal{L} = \mathbb{K}_{\mathcal{L}'} \cup \{K_1 \ldots K_n\}$,
