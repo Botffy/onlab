@@ -1,8 +1,10 @@
 \documentclass[11pt,a4paper]{article}
 \usepackage[margin=2.5cm, bindingoffset=1.25cm]{geometry}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[magyar]{babel}
-\usepackage[hidelinks]{hyperref}
+\usepackage{pdfpages}
 \usepackage[
 	backend=biber,
 	style=ieee,
@@ -20,6 +22,8 @@
 \usepackage{amssymb}
 \usepackage{enumitem}
 \usepackage{xcolor}
+\usepackage[hidelinks, unicode]{hyperref}
+
 
 \DeclareQuoteStyle{magyar}%
   {\quotedblbase}
@@ -45,7 +49,7 @@
 
    
 \begin{document}
-
+\pagenumbering{roman}
 \begin{titlepage}
 \newlength\drop
 \setlength\drop{0.08\textheight}
@@ -70,7 +74,14 @@ Dr.~Feldhoffer Gergely
 
 \end{titlepage}
 
+\includepdf{parts/elolap.pdf}
+
+\thispagestyle{empty}
+\tableofcontents
+
 \newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
 \section{Programozási nyelvek}
 \label{sec:proglang}
 \input{parts/proglang.tex}
