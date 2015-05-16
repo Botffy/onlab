@@ -39,12 +39,44 @@
 \newtheorem*{defn}{Definíció} 
 
 \newcommand{\cls}[1]{\texttt{#1}}
- 
+
+   
 \begin{document}
 
+\begin{titlepage}
+\newlength\drop
+\setlength\drop{0.08\textheight}
+
+\centering
+\vspace*{2\drop}
+
+{\huge A PLanG programozási nyelv kiterjesztése}\\[\baselineskip]
+{Önálló laboratóriumi beszámoló}\\[\baselineskip]
+
+\vspace*{0.5\drop}
+\large 2015.
+
+\vfill
+\begin{flushright} \large
+\emph{Készítette:}\\
+Scipiades Ármin\\[\baselineskip]
+\emph{Konzulens:} \\
+Dr.~Feldhoffer Gergely
+\end{flushright}
+\vspace*{\drop}
+
+\end{titlepage}
+
+\newpage
 \section{Programozási nyelvek}
 \label{sec:proglang}
 \input{parts/proglang.tex}
+
+\newpage
+\section{Az XPLanG programozási nyelv}
+\label{sec:xplang}
+\input{parts/xplang.tex}
+
 
 \newpage
 \printbibliography
