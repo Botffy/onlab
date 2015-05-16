@@ -1,0 +1,46 @@
+
+Mint minden szoftverfolyamatnak, a nyelvtervezés első fázisa is a követelményfeltárás: a nyelv feladatterének elemzése, a felhasználói igények felmérése.
+Mivel létező nyelv kiterjesztéséről van szó, elemezni kellett a létező nyelvet is \aref{subsubsec:edulang}. részben ismertetett metrikák szerint.
+
+\subsection{A PLanG programozási nyelv értékelése}
+A PLanG első pillantásra szembetűnő jellegzetessége, hogy kulcsszavai magyar nyelvűek, ami magyar diákok számára növelheti a kulcsszavak szerepkifejező erejét.
+Mégis sok kulcsszó esetlen, furcsa megfogalmazású (\plang{MEGNYIT}, \plang{KI}, \plang{KEREK}, \plang{RND}).
+Míg az angol programozási nyelvek kulcsszavai, függvénynevei rendszerint felszólító módú igéks, addig a PLanG módszeresen főneveket használ, még a függvénynevekre is.
+Az ilyen függvények, utasítások szerepkifejező képessége alacsony (vajon \plang{KEREK 10.5} kerekíti az értéket, vagy azt mondja meg, kerek szám-e az érték? a \plang{NAGY 'z'} azt mondja, nagybetű-e a paraméter vagy nagybetűvé alakít?).
+A kulcsszavak közül a \plang{CIKLUS} nem feltétlen érthető egy olyan diáknak, aki még soha nem programozott; szerepkifejezőbb lehetett volna például az *\plang{ISMÉTELD} kulcsszó.
+
+Az operátorok között is vannak alacsony szerepkifejezésű elemek: nem magától értetődő például, hogy a \plang{/=} az áthúzott egyenlőségjel helyett áll, és a \plang{DIV} és a \plang{/} osztások közül sem evidens, melyik melyik.
+Hasonlóképp, bár kis programozói előképzettséggel ,,nyilvánvaló'' a \plang{:=} értékadó utasítás szemantikája, de kezdőknek nem feltétlen az: anekdotikus bizonyíték szerint viszonylag gyakori hiba, hogy a diák nem tudja, melyik oldal adja, és melyik kapja az értéket.
+Valóban, a \plang{:=} csak az Algol nyelvben szerepelt először értékadásként, és jó példája a \textit{memetikus konzisztenciának}, vagyis hogy csak azért csinálunk valamit úgy, mert mások is úgy csinálták, és nem vesszük figyelembe az eltérő igényeket\cite{McIver01}.
+Szintén alacsony a tömbdeklarációk szerepkifejező ereje (\plang{EGÉSZ[5]}), és ez is a memetikus konzisztenciából fakad.
+
+A leképezés közelisége közepes-alacsony.
+Jól teljesítenek az operátorok, amelyek viselkedésükben és megjelenésükben is megfelelnek a diákok matematikai tudásának.
+Különösen szép, hogy az unáris függvényeket nem kell zárójelezni (\plang{sin x}), és egyedi, ám nagyszerű az elemszám-lekérdezés cirkumfix operátora (\plang{|tomb|}).
+%, bár zavaró lehet a matematikai jelölésben megszokott *\plang{a < b < c} jellegű összehasonlítás hiánya.
+A tömbök viszont már nagyon távol vannak a hallgató gondolkodásától: méretük mindig fix, alapműveleteik hiányoznak.
+Lehet persze avval érvelni, hogy például a tartalmazásvizsgálat megvalósítása a hallgató feladata, így helyes, hogy a PLanGban nincs ilyen művelet -- azonban az absztrakciós eszközök teljes hiánya a hallgatót arra kényszeríti, hogy minden esetben manuálisan, ciklussal végezze el a tartalmazásvizsgálatot, ami csökkenti a robosztusságot és növeli a szellemi erőfeszítést.
+Ismerősebb lenne a tanulóknak egy, a matematikai halmazokhoz hasonló összetett típus.
+
+A nyelvtan szép, letisztult. Nagy erény, hogy nincs szükség utasításlezáró jelre, ez nagyban csökkenti a ,,becsúszó'' hibák valószínűségét.
+
+A PLanG egyáltalán nem nyújt absztrakciós eszközöket, a programozó semmilyen formában nem változtathat a nyelven.
+Az alprogramok hiánya nagyban növeli a terjengősséget és a szellemi erőfeszítést, a felhasználó által definiált típusok hiánya csökkenti a robosztusságot és a módszertani helyességet.
+
+
+
+
+
+
+% \subsection{tervezési céloks és döntések}
+% szintaxis és szemantika szeparációja
+
+%..
+% java
+
+% \subsection{Célok megvalósulása/postmortem}
+% túlzott generalizáció
+% java
+% more is more error in langdesign
+
+%Célszerű lett volna kérdőíves felmérést végezni elsőéves diákok részvételével, komolyabban kutatni a nyelvek pedagógiai aspektusait, illetve elemezni lehetett volna az egyetem rendelkezésére álló nagyméretű korpuszt; erre viszont erőforrások hiányában nem került sor.

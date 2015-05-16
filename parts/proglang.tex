@@ -62,7 +62,7 @@ Procedurális nyelvek esetében történelmi és kényelmi okokból a \textit{sz
 		\item $\mathbb{P}_\mathcal{L} \subseteq \mathbb{M}_\mathcal{L}, \mathbb{P}_\mathcal{L} \not= \emptyset$, az $\mathcal{L}$-beli programok halmaza.
 		\item $eval_{\mathcal{L}}$ a $\mathbb{P}_\mathcal{L}$ felett értelmezett predikátum, a nyelv dinamikus szemantikája, amely akkor igaz, ha a program elvégzi a feladatát%
 		\footnote{
-Felleisen $eval_\mathcal{L}$-t olyan predikátumként definiálja, ami akkor igaz, ha a program terminál\cite{Felleisen90}, ezzel  definíciója a lehető legáltalánosabb. Ezt túl megengedőnek érzem, ezért választottam ezt a homályos, ám intuitív meghatározást. Ennek pontosabb definiálására egy mód lehet a programok $\left<feladat, program\right>$ párként való megadása.
+Felleisen $eval_\mathcal{L}$-t olyan predikátumként definiálja, ami akkor igaz, ha a program terminál\cite{Felleisen90}, ezzel  definíciója a lehető legáltalánosabb. Ezt túl megengedőnek érzem, ezért választottam ezt a homályos, ám intuitív meghatározást. Ennek pontosabb definiálására egy mód lehet az $eval_\mathcal{L}$ $\left<feladat, program\right>$ párok feletti értelmezése.
 		}.
 	\end{itemize}
 
@@ -92,12 +92,12 @@ Egy személyes példa: csak a múlt év őszén tudtam meg, hogy a Javában lét
 \end{defn}
 
 
-\subsection{Programozási nyelvek minősége}
+\subsection{Programozási nyelvek minőségi mutatói}
 Az univerzális programozási nyelvek számításelméleti szempontból teljesen azonosak: tetszőleges rendelkezésre álló idő és memória mellett bármely számítás elvégezhető velük.
 Intuitívan érezzük viszont, hogy a nyelvek között minőségi különbségek vannak, ez a különbség viszont nehezen megfogható: magas és alacsony szintű nyelvek között könnyű minőségi különbséget találni, de két magasszintű nyelv minőségét nehéz összehasonlítani.
 
 \subsubsection{Kifejezőerő}
-A programozók informálisan gyakran mondják, hogy ez vagy az a nyelv \textit{nagyobb kifejezőerővel bír}: hogy egy agortimus könnyebben, elegánsabban implementálható egy nyelvben, mint a másikban, hogy egy nyelvben könnyebben kifejezik magukat, mint egy másikban.
+A programozók informálisan gyakran mondják, hogy ez vagy az a nyelv \textit{nagyobb kifejezőerővel bír}: hogy egy algortimus könnyebben, elegánsabban implementálható egy nyelvben, mint a másikban, hogy egy nyelvben könnyebben kifejezik magukat, mint egy másikban.
 Az az intuitív meglátásunk is hamar kialakul, hogy némely nyelvi elem fontosabb a kifejezőerő szempontjából, mint a többi: némelyik lényeges, némelyik meg csak \textit{szintaktikus cukormáz}, amely könnyen kifejezhető más nyelvi elemekkel, így a nyelv kifejezőerejéhez nem ad hozzá, csak édesebbé teszi a nyelvet az emberek számára.\cite{Landin64}
 
 A kifejezőerő szubjektív fogalom, de voltak kísérletek a definiálására: a hacker-kultúrában\cite{Graham02} és a szoftvertechnológiában\cite{MythManMonth}\cite{CodeComplete} is meghatározó nézet szerint egy nyelv kifejezőereje a \textit{tömörségével} (\textit{succintness}) arányos -- egy nyelv annál kifejezőbb, minél kevesebb szóval tudok elmondani valamit.
@@ -130,12 +130,13 @@ Néhány nyelv arra is eszközt biztosít, hogy a programozó tetszőleges új n
 Ezeket az eszközöket a \textit{szintaktikai absztrakció eszközei}nek nevezzük, és segítségükkel a kifejezőerő egy új szintjét definiálhatjuk.
 
 Azt mondjuk, hogy egy $K$ nyelvi elem \textit{makrókifejezhető} $\mathcal{L}'$-ben, ha létezik egy megfelelő $A$ szintaktikai absztrakció, amelyre
-$\varphi (K(e_1 \ldots e_n) ) = A(\varphi(e_1) \ldots \varphi(e_n))$; vagyis a nyelvi elem eliminálása nem csak a program globális struktúráját őrzi meg, hanem az eliminált L-mondat alkotóelemeinek struktúráját is\cite{Felleisen90}. Ez a definíció nagyon közel áll a szintaktikus cukormázról alkotott intuitív képünkhöz.
+$\varphi (K(e_1 \ldots e_n) ) = A(\varphi(e_1) \ldots \varphi(e_n))$; vagyis a nyelvi elem eliminálása nem csak a program globális struktúráját őrzi meg, hanem az eliminált L-mondat alkotóelemeinek struktúráját is\cite[3.11~definíció]{Felleisen90}. Ez a definíció nagyon közel áll a szintaktikus cukormázról alkotott intuitív képünkhöz.
 
 Látható, hogy a nyelv kifejezőerejét megsokszorozza egy szintaktikai absztrakciós eszköz; és minél megengedőbbek az absztrakciós eszközök, annál nagyobb a nyelv kifejezőereje. Így például egy alprogram-absztrakciót biztosító nyelv, amelynek alprogramjai elfogadnak paraméterként szekvenciát, nagyobb kifejezőerejű, mint amelyiknek alprogramjai nem tudnak szekvenciát kezelni paraméterként. %ez elég esetlen
 
 
 \subsubsection{Hasznosság és használhatóság}
+\label{subsec:utility_and_usefulness}
 A programozási nyelv az ember és gép közötti kommunikáció eszköze, ezért értelmezhetőek rá a felhasználói felületek minőségi mutatói\cite{McIver01}.
 Egy programozási nyelv \textbf{hasznos} (\textit{useful}) ha lehetővé teszi, hogy a programozó gyorsan és hatékonyan írja meg a feladatát megvalósító programot. A hasznosság fő metrikái:
 \begin{description}
@@ -156,9 +157,41 @@ A CD rendszere 14, páronként független dimenziót ad egy jelölésrendszer ha
 	\item[Leképezés közelisége] Mennyire könnyen fejezhető ki a nyelven a programozó algoritmusa, hány nyelvi elem felel meg a programozó elvi megoldásának egy lépésének, milyen könnyen fejezhető ki a feladat állapotterének műveletei a nyelvben?
 	\item[Szellemi erőfeszítés] Mekkora erőfeszítést kíván a nyelv használata?
 	\item[Szerepkifejezés] Mennyire nyilvánvaló, hogy egy dolog mire jó? Milyen mértékben lehet következtetni egy nyelvi elem szemantikájára a szintaxisa és lexikális tulajdonságai alapján?
-	\item[Terjengősség] Milyen rövdien lehet kifejezni egy algoritmust a nyelven? Milyen hosszúak a nyelv lexémái?
+	\item[Terjengősség] Milyen röviden lehet kifejezni egy algoritmust a nyelven? Milyen hosszúak a nyelv lexémái?
 	\item[Viszkozitás] Mekkora a kis változtatások ára? Mennyire változtatható egy program lokális struktúrája a globális struktúra változtatása nélkül?
 \end{description}
 
-Egyik dimenzió sem egyértelműen ,,jó'' vagy ,,rossz'', a dimenziók értékelése a nyelv feladatától függ.
+Egyik dimenzió sem egyértelműen ,,jó'' vagy ,,rossz'', a dimenziók megítélése a nyelv feladatától függ.
 
+
+\subsection{Oktatási célú programozási nyelvek}
+\label{subsubsec:edulang}
+A programozás oktatása más követelményeket támaszt egy nyelvvel szemben, mint az ipari felhasználás\cite{McIver01}.
+A kognitív dimenziók optimális értékei a kifejezetten a programozás alapjainak oktatására szánt nyelvre a következőképpen alakulnak:
+
+\paragraph{Absztrakció -- alacsony} Az oktatási nyelv \textit{absztrakciós korlát}jának, vagyis a nyelv használatához minimálisan megtanulandó absztrakciós eszközök számának nagyon alacsonynak kell lennie, és egyszerű programok írásához nem is szükséges túl sok absztrakciós eszköz.
+A Java nyelvben például már a legegyszerűbb program írásához találkozni kell az objektumosztály fogalmával.
+
+\paragraph{Hibák vonzása -- nagyon alacsony} A hiba frusztrálja és elbizonytalanítja a tanulót, a nyelvtervezés során minden áron törekedni kell a programozói hibalehetőségek minimalizálására.
+Az C++ utasításlezáró pontosvesszője például gyakori hibaforrás, amit a kezdők nehezen is azonosítanak, hiszen a \cls{gcc} fordítóprogram hibaüzenete szót sem ejt pontosvesszőről.
+
+\paragraph{Konzisztensség -- közepes} A konzisztensség segíthet a tanulónak, hiszen ha elsajította egy nyelvi elem használatát, akkor automatikusan használni fogja tudni a hasonló nyelvi elemeket.
+Ugyanakkor nem biztos, hogy a kezdő képes felismerni egy szemantikai hasonlóságot két nyelvi elem között, illetve nem tudja kihasználni az elvi hasonlóságot.
+Jó példa a túlzásba vitt konzisztensségre a Turing nyelv tömbelem-lekérdező operátora, ami ugyanúgy sima zárójelként jelenik meg, mint a függvényhívás, mondván, hogy mindkettő értéklekérés; a diák ugyanakkor egy \cls{A(1)} konstrukciót látva nem tudja eldönteni, hogy \cls{A} változó-e vagy függvény.
+
+\paragraph{Leképezés közelisége -- nagyon magas} A nyelvnek illeszkednie kell a tanulók feladatához és megoldásához, tükröznie kell a tanulók létező ismereteihez, világképéhez; de mutatnia kell az elsajátítandó világképet is.
+A Pascal oktatónyelv például jó leképezése egy ideális virtuális gépnek, de a kezdők világképétől távol áll, ami különösen a tömbök és a karakterláncok nehézkes kezelésénél szembetűnő.
+
+\paragraph{Szellemi erőfeszítés -- alacsony} A programozás során elkerülhetetlen a szellemi erőfeszítés, de nem szabad, hogy a nyelv használata szükségtelenül nehezítse a feladat megoldását. A Scheme oktatónyelvben például a lambda-kalkulushoz való idomulás nehéz feladat a kezdő programozónak.
+
+\paragraph{Szerepkifejezés -- magas} Jól megválasztott felszíni szintaxis mellett a tanuló sokkal könnyebben olvashat és érthet meg programokat.
+Egy jó szerepkifejezésű nyelvi elem nem igényel különösebb magyarázatot, használata azonnal értetődő.
+Például a C++ \cls{cout << "Hello world";} utasítása sokkal kevésbé szerepkifejező, mint a Pascal-szerű \cls{print "hello world"}: a \cls{cout} szóval ellentétben a \cls{print} felismerhető a laikus számára is, a \cls{<<} operátor megértése pedig abszolút fejlettebb tudást kíván.
+
+\paragraph{Terjengősség -- közepes} A nyelvnek strukturálisan elég tömörnek kell lennie ahhoz, hogy egyszerű programokat nagyon röviden, redundancia nélkül ki lehessen fejezni, de a túlzott tömörség az olvashatóság rovására megy.
+Bőbeszédű nyelv például az AppleScript, amelynek a természetes nyelvhez való hasonlósága gyakran a programstruktúra átláthatatlanságához vezet.
+
+\paragraph{Viszkozitás -- alacsony} A programozás tanulása gyakran jár kísérletező próbálgatással\cite{McIver01}; ha ez a próbálgatás, a programok változtatgatása nehéz és kényelmetlen feladat, a tanuló lelkesedése csökkenni fog, frusztrációhoz vezethet.
+Magas viszkozitású nyelv például az Ada: deklarációs blokkjai, erős típusossága, import-szabályai, nehézkes fordítási mechanizmusa mind nehezítik a gyors próbálgatást.\\[\baselineskip]
+A kifejezetten a programozás alapjainak egyetemi szintű oktatására szánt nyelv esetében a hasznosság metrikái közé soroljuk a \textbf{módszertani helyesség} támogatását: a nyelvnek alakítania kell a diák gondolkodásmódját, jó programozói szokások, programozástechnikai és számítástudományi alapvetések elsajátítására kell késztetnie.
+Ez gyakran ellentétbe kerül a használhatóság metrikáival: módszertanilag helyes megkülönböztetést tenni például függvények és eljárások között, bár a tanulók ilyen megkülönböztetést nem tesznek\cite{McIver01}.
