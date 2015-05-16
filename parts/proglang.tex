@@ -62,11 +62,11 @@ Procedurális nyelvek esetében történelmi és kényelmi okokból a \textit{sz
 		\item $\mathbb{P}_\mathcal{L} \subseteq \mathbb{M}_\mathcal{L}, \mathbb{P}_\mathcal{L} \not= \emptyset$, az $\mathcal{L}$-beli programok halmaza.
 		\item $eval_{\mathcal{L}}$ a $\mathbb{P}_\mathcal{L}$ felett értelmezett predikátum, a nyelv dinamikus szemantikája, amely akkor igaz, ha a program elvégzi a feladatát%
 		\footnote{
-Felleisen $eval_\mathcal{L}$-t olyan predikátumként definiálja, ami akkor igaz, ha a program terminál\cite{Felleisen90}, ezzel  definíciója a lehető legáltalánosabb. Ezt túl megengedőnek érzem, ezért választottam ezt a homályos, ám intuitív meghatározást. Ennek pontosabb definiálására egy mód lehet a programok (feladat, program) párként való megadása.
+Felleisen $eval_\mathcal{L}$-t olyan predikátumként definiálja, ami akkor igaz, ha a program terminál\cite{Felleisen90}, ezzel  definíciója a lehető legáltalánosabb. Ezt túl megengedőnek érzem, ezért választottam ezt a homályos, ám intuitív meghatározást. Ennek pontosabb definiálására egy mód lehet a programok $\left<feladat, program\right>$ párként való megadása.
 		}.
 	\end{itemize}
 
-	\normalfont Az így meghatározott absztrakt nyelv lexikális sajátosságait egy $R: \mathbb{K} \rightarrow \Sigma^*$, a nyelv programkonstruktoraihoz szimbólumsorozatokat rendelő függvény megadásával definiálhatjuk.
+	\normalfont Az így meghatározott absztrakt nyelv lexikális sajátosságait egy $R: \mathbb{K} \rightarrow \Sigma^*$, a nyelv programkonstruktoraihoz szimbólumsorozatokat rendelő függvény megadásával definiálhatjuk. Ha ez a leképezés nem injektív, a nyelv felszíni szintaxisa környezetfüggő lesz.
 \end{defn}
 
 \begin{defn}[Konzervatív kiterjesztés\protect{\cite[3.2~definíció]{Felleisen90}}]
@@ -87,11 +87,12 @@ Ekkor a programozó által használt $\mathcal{L}'$ nyelv az ideális $\mathcal{
 
 \normalfont Egy programozó nyelvhasználatából egy nyelvi elem hiányozhat technikai megfontolásokból (mert ,,nem hatékony''), mert a használata nem illendő (jó példa erre a \cls{goto} utasítás, ami ugyan a legtöbb nyelvben máig létezik, még olyan modern nyelvekben is, mint a Ruby, de használata a magasszintű programozásban teljesen eltűnt), vagy akár mert nem tud az adott nyelvi elem létezéséről.
 Naivnak tűnhet a feltételezés, hogy egy aktív és képzett programozó nem tud egy nyelvi elemről, de gondoljunk bele, hogy egy nyelv standard könyvtárának függvényei is nyelvi elemek; másrészt a modern programozási nyelvek gyakran nagyon komplexek, emberek számára nehezen megismerhetőek a maguk teljességében.
-Én magam csak a múlt év őszén tudtam meg, hogy a Javában létezik konstruktordelegáció: az általam használt Java azóta sokkal jobb minőségű, mint azelőtt.
+
+Egy személyes példa: csak a múlt év őszén tudtam meg, hogy a Javában létezik konstruktordelegáció: az általam használt Java azóta sokkal jobb minőségű, mint azelőtt.
 \end{defn}
 
 
-\subsection{Programozási nyelvek minőségi mutatói}
+\subsection{Programozási nyelvek minősége}
 Az univerzális programozási nyelvek számításelméleti szempontból teljesen azonosak: tetszőleges rendelkezésre álló idő és memória mellett bármely számítás elvégezhető velük.
 Intuitívan érezzük viszont, hogy a nyelvek között minőségi különbségek vannak, ez a különbség viszont nehezen megfogható: magas és alacsony szintű nyelvek között könnyű minőségi különbséget találni, de két magasszintű nyelv minőségét nehéz összehasonlítani.
 
@@ -108,9 +109,56 @@ Az elterjedt tömörítő eljárások optimálisak, közelítik a Shannon forrá
 Ez a megközelítés vonzóan tudományosnak tűnhet, amíg fel nem ismerjük, hogy a forrásszöveg entrópiája alapvetően a programot leíró szöveg karakterereinek eloszlásától függ, ami tisztán lexikális kérdés, és nincs nagyobb összefüggésben a nyelv kifejezőerőerejével, mint a karakterek száma.
 Ilyen megközelítésért lásd például a The Computer Language Benchmarks Game oldalt: \url{http://benchmarksgame.alioth.debian.org}.
 }%
-: ezek statisztikák készítésére könnyen alkalmazható metrikák, de az eredményeket túlzottan torzítják a nyelv lexikális sajátosságai, névadási és tördelés konvenciói, melyekről érezzük, hogy bár fontosak, nem kellene igazán befolyásolniuk a kifejezőerőt.
+: ezek statisztikák készítésére könnyen alkalmazható metrikák, de az eredményeket jelentősen torzítják a nyelv lexikális sajátosságai, névadási és tördelés konvenciói, melyekről érezzük, hogy bár fontosak, nem kellene igazán befolyásolniuk a kifejezőerőt.
 Ezt a problémát kiküszöbölhetjük, ha a tömörséget egy program absztrakt szintaxisfájának elemszámával mérjük, de megfelelő elemzőt írni minden vizsgálandó nyelvhez nehéz feladat.
+Akármilyen metrikát választunk is, a program méretének mérése, mint a statisztikai nyelvtechnológiai eszközök általában, csak akkor használható, ha nagy korpusszal dolgozunk, a nyelv ismerete önmagában tehát nem elégséges a nyelv kifejezőerejének vizsgálatához.
 Ráadásul a kifejezőerőt tisztán a tömörséggel magyarázó elmélet -- formális definíció híján -- nem ad lehetőséget, hogy bármit rigorózusan bizonyítsunk egy nyelvről.
 Nem igazán teszi lehetővé azt sem, hogy nyelvi elemekről érveljünk: szintaktikus cukormáz-e, vagy létfontosságú?
 
+Mathias Felleisen a formális rendszerek elméletének eszköztárát felhasználva épített rendszert a kifejezőerő leírására és elemzésére\cite{Felleisen90}.
+Informálisan úgy foglalhatjuk össze, hogy $\mathcal{L}$ kifejezőbb $\mathcal{L}' = \mathcal{L} \setminus \{K_1 \ldots K_n\}$-nél, ha egy $\mathcal{L}$-beli, valamely $K_i$ konstruktort tartalmazó program lefordításához $\mathcal{L}'$-re a program globális átszervezése szükséges.
+Azokat a programkonstruktorokat pedig, amelyeknek fordításához csak lokális transzformációkra van szükség, kifejezhetőnek vagy \textit{eliminálhatónak} mondjuk.
+A $\varphi: \mathcal{L} \rightarrow \mathcal{L}'$ fordítási függvény tulajdonságainak megkötésével definiálhatjuk a kifejezőerő különböző szintjeit. %ez így tré, példa, függvényelim
+
+Felleisen rendszerét használva a nyelvtervezés folyamán formálisan is bizonyítható, hogy egy nyelvi elem hozzáadása ténylegesen változtat-e a nyelv kifejezőerején.
+
+
+\subsubsection{Belső kiterjeszthetőség és makrókifejezhetőség}
+Egy kiterjeszthető nyelvben a programozó új nyelvi elemeket hozhat létre.
+A legtöbb nyelv kiterjeszthető valamilyen szinten, például lehetőséget biztosít alprogramok, új adattípusok létrehozására.
+Néhány nyelv arra is eszközt biztosít, hogy a programozó tetszőleges új nyelvi elemeket hozzon létre: a Lisp makró konstrukciói segítségével például a nyelv tetszőleges programkonstruktorokkal bővíthető.
+Ezeket az eszközöket a \textit{szintaktikai absztrakció eszközei}nek nevezzük, és segítségükkel a kifejezőerő egy új szintjét definiálhatjuk.
+
+Azt mondjuk, hogy egy $K$ nyelvi elem \textit{makrókifejezhető} $\mathcal{L}'$-ben, ha létezik egy megfelelő $A$ szintaktikai absztrakció, amelyre
+$\varphi (K(e_1 \ldots e_n) ) = A(\varphi(e_1) \ldots \varphi(e_n))$; vagyis a nyelvi elem eliminálása nem csak a program globális struktúráját őrzi meg, hanem az eliminált L-mondat alkotóelemeinek struktúráját is\cite{Felleisen90}. Ez a definíció nagyon közel áll a szintaktikus cukormázról alkotott intuitív képünkhöz.
+
+Látható, hogy a nyelv kifejezőerejét megsokszorozza egy szintaktikai absztrakciós eszköz; és minél megengedőbbek az absztrakciós eszközök, annál nagyobb a nyelv kifejezőereje. Így például egy alprogram-absztrakciót biztosító nyelv, amelynek alprogramjai elfogadnak paraméterként szekvenciát, nagyobb kifejezőerejű, mint amelyiknek alprogramjai nem tudnak szekvenciát kezelni paraméterként. %ez elég esetlen
+
+
+\subsubsection{Hasznosság és használhatóság}
+A programozási nyelv az ember és gép közötti kommunikáció eszköze, ezért értelmezhetőek rá a felhasználói felületek minőségi mutatói\cite{McIver01}.
+Egy programozási nyelv \textbf{hasznos} (\textit{useful}) ha lehetővé teszi, hogy a programozó gyorsan és hatékonyan írja meg a feladatát megvalósító programot. A hasznosság fő metrikái:
+\begin{description}
+	\item[Kifejezőerő] Két nyelv közül a nagyobb kifejezőerejű a hasznosabb. Ez ugyan reláció, és nem metrika, de a nyelv szintaktikai absztrakciós eszközeinek száma és minősége jó becslés egy abszolút kifejezőerőre.
+	\item[Robosztusság] A programozó hibája nem járhat katasztrofális következményekkel. A nyelv robusztus, ha nyelvi elemei lehetővé teszik a hatékony hibadetektálást.
+	\item[Emberorientáltság] A nyelv emberorientált, ha amikor csak lehet, a programozó igényeit a gép igényei elé helyezi.
+	\item[Feladatorientáltság] A nyelvnek csak azokat a nyelvi elemeket kell biztosítania, amelyeket a programozók feladataik során használnak; és nem szabad olyan nyelvi elemeket biztosítania, amelyeket nem használnak. Ugyanis minél több nyelvi elemet biztosít egy nyelv, annál komplexebb, nehezebben használható lesz, arányosan kisebb lesz a programozók nyelvhasználata.
+\end{description}
+
+Ezek a metrikák gyakran nehezen mérhetőek, de objektívek. Ezzel szemben a \textbf{használhatóság} (\textit{usability}) metrikái eredendően szubjektívek, egy nyelv -- vagy bármely rendszer -- használhatósága a felhasználó demográfiai hátterétől és tapasztalatától függ\cite{Veto}.
+A használhatóság analízisére Green adott 1989-ben objektív, racionális rendszert, amelyet a \textit{jelölésrendszerek kognitív dimenziói}nak (\textit{cognitive dimensions of notation}, CD) nevezett el\cite{Green89}.
+A CD rendszere 14, páronként független dimenziót ad egy jelölésrendszer használhatóságának meghatározására\cite{GreenBlackwell98}. Ezekből a programozási nyelvek szempontjából legfontosabbak a következők:
+
+\begin{description}
+	\item[Absztrakció] Milyen szintaktikai absztrakciós eszközöket biztosít a nyelv? Hány ilyen eszköz használatát kell elsajátítani a nyelv minimális használatához?
+	\item[Hibák vonzása] Mennyire növeli a nyelv a programozói hibák előfordulásának esélyét?
+	\item[Konzisztensség] Hasonló dolgok hasonló módon fejezhetőek ki a nyelvben? Hasonló szemantikájú nyelvi elemek hasonló szintaktikával és lexikális tulajdonságokkal rendelkeznek?
+	\item[Leképezés közelisége] Mennyire könnyen fejezhető ki a nyelven a programozó algoritmusa, hány nyelvi elem felel meg a programozó elvi megoldásának egy lépésének, milyen könnyen fejezhető ki a feladat állapotterének műveletei a nyelvben?
+	\item[Szellemi erőfeszítés] Mekkora erőfeszítést kíván a nyelv használata?
+	\item[Szerepkifejezés] Mennyire nyilvánvaló, hogy egy dolog mire jó? Milyen mértékben lehet következtetni egy nyelvi elem szemantikájára a szintaxisa és lexikális tulajdonságai alapján?
+	\item[Terjengősség] Milyen rövdien lehet kifejezni egy algoritmust a nyelven? Milyen hosszúak a nyelv lexémái?
+	\item[Viszkozitás] Mekkora a kis változtatások ára? Mennyire változtatható egy program lokális struktúrája a globális struktúra változtatása nélkül?
+\end{description}
+
+Egyik dimenzió sem egyértelműen ,,jó'' vagy ,,rossz'', a dimenziók értékelése a nyelv feladatától függ.
 

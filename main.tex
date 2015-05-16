@@ -2,7 +2,7 @@
 \usepackage[margin=2.5cm, bindingoffset=1.25cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[magyar]{babel}
-\usepackage[hidelinks=true]{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage[
 	backend=biber,
 	style=ieee,
@@ -10,11 +10,11 @@
 	bibencoding=utf8,
 	sortlocale=hu
 ]{biblatex}
-\usepackage{csquotes}
+	\usepackage{csquotes}
 \usepackage{setspace}
 \usepackage{enumitem}
 \usepackage{titlesec}
-\usepackage{microtype}
+\usepackage[babel=true,tracking=true,kerning=true]{microtype}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
@@ -33,7 +33,7 @@
 \sloppy
 \frenchspacing
 \onehalfspacing
-\setlist{nosep}
+\setlist{noitemsep}
 
 \theoremstyle{plain}
 \newtheorem*{defn}{Definíció} 
