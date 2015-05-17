@@ -2,7 +2,7 @@
 \subsection{Követelményfeltárás}
 
 Mint minden szoftverfolyamatnak, a nyelvtervezés első fázisa is a követelmények feltárása: a nyelv feladatterének elemzése, a felhasználói igények felmérése.
-Célszerű lett volna kérdőíves felmérést végezni elsőéves diákok részvételével, komolyabban kutatni a nyelvek pedagógiai aspektusait, illetve elemezni lehetett volna az egyetem rendelkezésére álló nagyméretű korpuszt; erre viszont erőforrások hiányában nem került sor.
+Célszerű lett volna kérdőíves felmérést végezni elsőéves diákok részvételével, komolyabban kutatni a nyelvek pedagógiai aspektusait, illetve elemezni lehetett volna az egyetem rendelkezésére álló nagyméretű korpuszt; erre erőforrások hiányában nem került sor.
 
 Mivel létező nyelv kiterjesztéséről van szó, elemezni kellett a létező nyelvet is \aref{subsubsec:edulang}. részben ismertetett metrikák szerint.
 
@@ -35,10 +35,7 @@ A tömböknek ráadásul nagyok kevés művelete van: lehet persze úgy érvelni
 
 A nyelvtan szép, letisztult, előreolvasást nem igénylő LL(1)-es nyelvtan. Nagy erénye, hogy nincs szükség utasításlezáró jelre, ez jelentősen csökkenti a ,,becsúszó'' hibák\cite[ld.][4.2.2 rész]{McIver01} valószínűségét.
 A legtöbb hibalehetőséget a változódeklarációs rész teremti, mert a PLanG nem deklarációs blokkot, hanem címkézett felsorolást használ, és a felsorolásból nagyon könnyű elhagyni a vesszőt.
-Az így keletkezett hibát nehéz feladat detektálni\footnote{
-	\cls{AZONOSÍTÓ, KETTŐSPONT, TÍPUSNÉV, AZONOSÍTÓ} tokensorozat esetén előreolvasás nélkül nem eldönthető, hogy az utolsó azonosító értékadás kezdetét jelöli-e, vagy  kimaradt a vessző a deklarációk felsorolásából.
-}%
-, a referenciaimplementáció nem is teszi meg.
+Az így keletkezett hibát viszonylag nehéz feladat detektálni, a referenciaimplementáció nem is teszi meg.
 A deklarációs rész a nyelv viszkozitását is növeli: új változó bevezetéséhez a használat helyétől távosli deklarációs részt kell szerkeszteni, amit nehezít a hibavonzó szintaxis.
 Általában, a deklarációs rész jó példája a gép- és nem emberorientált tervezésnek: az emberek számára csak csekély haszna van, elsősorban a gépek számára hasznos, megkönnyíti a feldolgozást és a kódgenerálást.
 
@@ -54,26 +51,26 @@ Ezen kívül hiányzik a nyelvből egy \cls{elsif} konstrukció és a deklaráci
 A PLanG használata a tanulók számára elválaszthatatlan a grafikus futtatókörnyezet használatától, így a nyelv elemzéséhez hozzátartozik a futtatókörnyezet hasznosságának és használhatóságának vizsgálata is.
 
 Kétségkívül hasznos a kifejezésfát és a memóriamodellt kirajzoló modul, bár haszánalatuk nem intuitív.
-A programszerkesztő modul nagyon primitív, komolyan hiányzik a szintaxiskiemelés, zárójelpárosság-ellenőrző.
+A programszerkesztő modul nagyon primitív, hiányzik a szintaxiskiemelés, zárójelpárosság-ellenőrző, undo funckionalitás, gyorsbillentyűk nincsenek.
 Az alapvető editorfunkciók közül hiányzik a tabulátor méretének megadásának lehetősége, a legutóbb szerkesztett file-ok megnyitásának lehetősége.
 A gombsorban a nagy zöld ,,Futtatás'' gomb jó használhatóságú, de például az ,,Értelmezés'' és az ,,Értelmezett program szerkesztése'' gombok közötti különbség egyáltalán nem világos.
 
-A futtatókörnyezet nem interaktív, a programok előre bekészített bemenetekkel dolgoznak,
-
+A futtatókörnyezet nem interaktív, a programok előre bekészített bemenetekkel dolgoznak, ez ellentétes a tanulók előzetes várakozásával.
+A fordítás folyamata két lépésből áll, ez is meglepetést okozhat, és növeli a nyelv viszkozitását.
 A futtatókörnyezet által biztosított filekezelés nagyon zavaró, nem intuitív: nem valódi, hanem virtuális file-okkal dolgozik.
 Ez rendszerint megzavarja a tanulókat, magyarázatot igényel, és csökkenti a tanuló PLanGba vetett hitét, csökkenti motivációját.
 
 \begin{table}[tb]
 	\centering
 	\begin{tabular}{ r c c }
-						& \bfseries PLanG	 & \bfseries ideális \\\hline
+						& \bfseries PLanG	 & \bfseries ideális \\ \hline
 		\bfseries absztrakció 		&\cellcolor{red!30}nincs & alacsony \\
 		\bfseries hibák vonzása 	&\cellcolor{red!30}közepes-magas & nagyon alacsony \\
-		\bfseries konzisztensség 	&\cellcolor{blue!30}közepes & közepes  \\
+		\bfseries konzisztensség 	&\cellcolor{yellow!30}közepes & közepes  \\
 		\bfseries leképezés közelisége &\cellcolor{red!30}közepes-alacsony & nagyon magas \\
 		\bfseries szellemi erőfeszítés &\cellcolor{green!30}alacsony-közepes & alacsony \\
 		\bfseries szerepkifejezés &\cellcolor{green!30}közepes-magas	& magas \\
-		\bfseries terjengősség &\cellcolor{blue!30}közepes	& közepes \\
+		\bfseries terjengősség &\cellcolor{yellow!30}közepes	& közepes \\
 		\bfseries viszkozitás &\cellcolor{red!30}közepes-magas	& alacsony
 	\end{tabular}
 	\caption{A PLanG kognitív dimenziói az ideális értékekkel összehasonlítva}
@@ -98,17 +95,48 @@ Szintén olcsó, de a hasznosságot növelő elem egy \cls{hiba} konstrukció, a
 Ajánlott lenne a tömbök kezelésének egyszerűsítése, például egy \cls{foreach} konstrukció bevezetésével, de egy dinamikusabb tömb típus bevezetése is előnyös lehet.
 
 
-\subsection{Tervezési döntések, célok}\label{subsec:plans}
+\subsection{Tervezési döntések}\label{subsec:plans}
+A tervezett nyelvet XPLanGnak (\textit{eXtended PLanG}, azaz kiterjesztett PLanG) neveztem el, és úgy döntöttem, a PLanG konzervatív kiterjesztése lesz, vagyis minden érvényes PLanG program érvényes XPLanG program is lesz.
+Ennek az az előnye, hogy így az XPLanG könnyen kiválthatja a PLanGot; másrészt izgalmasnak tűnt a lehetőség, hogy az XPLanG a régi, elsősként írt PLanG programjaimat értelmezni tudja.
 
-% szintaxis és szemantika szeparációja
+A megvalósításhoz használt nyelvnek a lefordított program korlátlan hordozhatósága miatt a Javát választottam.
+Legalacsonyabb verziószámú támogatott virtuális gépnek abszolút elterjedtsége miatt a hatos JVM-et választottam, bár felmerült az ötös JVM támogatása is, mivel az egyetem \cls{turdus} szerverén csak ötös verziójú Java fut.
+Már a projekt ötletének felmerülésekor volt egy olyan hátsó szándékom, hogy népszerűsítsem a fordítóprogramokat hallgatótársaim körében, ezért minél hozzáférhetőbb szoftvert szerettem volna írni, amelynek megértése, fordítása, módosítása könnyű, ezért határoztam el, hogy minél kevesebb függőség felhasználásával fogok dolgozni.
+Azt is eldöntöttem, hogy automatizált parser generátor használata helyett kézzel fogok rekurzív leszállásos elemzőt írni, egyrészt demonstratív jellege miatt, másrészt mert megkönnyíti az informatív hibaüzenetek generálását.
 
-%..
-% java
+Minél általánosabb fordítóprogramot akartam írni, egy  keretrendszer-félét, amely felszíni szintaxissal paraméterezhető.
+Az volt az álmom, hogy több leszármazott nyelvet kezeljen a program: a PLanGot, a PLanG apró felhasználhatósági javításokkal ellátott kiterjesztését, majd az; ráadásul azt is szerettem volna elérni, hogy a lexikális tulajdonságok minél könnyebben testreszabhatóak legyenek(\cite{Balogh12} inspirált), például azért, hogy külföldi vendéghallgatók is tudják használni a nyelvet.
 
-% \subsection{A tervezési döntések értékelése}
-% \Aref{subsec:plans}
-% túlzott generalizáció
-% java
+A fenti döntések utólagos értékeléséért lásd \aref{subsec:planres} részt.
+
+
+\subsection{Implementáció}
+
+\begin{figure}[htb]
+	\centering
+	\resizebox{\textwidth}{!}{\input{parts/figures/system_diagram.tex}}
+	\caption{A rendszer idealizált adatfolyam diagramja.}
+\end{figure}
+
+
+\subsection{A tervezési döntések utólagos értékelése} \label{subsec:planres}
+Ebben a részben \aref{subsec:plans} részben ismertetett tervezési döntéseket fogom értékelni.
+
+Szép cél volt ugyan az, hogy minden PLanG program legyen érvényes XPLanG program is, de emiatt az XPLanGban is megjelennek a PLanG legnagyobb felhasználhatósági problémái, az alacsony szerepkifejező erejű kulcsszavak és a deklarációs lista.
+A változtatható lexikális elemek a kulcsszavak problémájára megoldást nyújtanak, de a deklarációs lista súlyos problémái megmaradtak.
+
+Nem volt egészen szerencsés választás a Java sem: a korlátlan hordozhatóság szép cél ugyan, de hasonló eredményt érünk el, ha a népszerű operációs rendszerekre fordított bináris állományokat terjesztjük, az egzotikusabb rendszerekhez pedig biztosítjuk a fordítás lehetőségét.
+Ezzel szemben a Java határozott objektumorientáltsága gyakran nehezítette a tisztán imperatív XPLanG fejlesztését, többször objektumelvű gondolatok szivárogtak bele a tervezésbe; ez különösen a típusrendszer alakításánál jelentett gondot.
+De ha már Javát használtam, sok gondot megspórolhattam volna külső könyvtárak szabadabb használatával: függőségkezelő eszközök használatával a külső könyvtárak kezelése kezdőknek sem nehéz feladat.
+Szintén érdemes lett volna kihasználni a Java 8 nyújtotta lehetőségeket.
+
+Nem volt rossz döntés viszont saját elemzőt készíteni: nem került sokkal időbe, mint egy parsergenerátor használatát tisztességesen elsajátítani, és valóban nagyobb kontrollom volt így a hibaüzenetek generálásában, és az elemzés logikai folyamatát is egyszerűsíteni tudtam.
+
+Az, hogy egyszerű fordítóprogram helyett egyfajta keretrendszert írtam komolyan megnehezítette és lassította a fejlesztést.
+Egyértelműen a túlzott generalizáció csapdájába estem, minden tekintetben célszerűbb lett volna egy csak az XPLanGot értelmező fordítóprogramot írni.
+
+%A kiterjesztett nyelv tervezésében is hasonló hibába estem, a ,,a több jobb'' hibájába\cite{McIver01}
+
+
 % more is more error in langdesign
-
 %

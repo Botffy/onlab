@@ -69,7 +69,7 @@ Felleisen $eval_\mathcal{L}$-t olyan predikátumként definiálja, ami akkor iga
 	\normalfont Az így meghatározott absztrakt nyelv lexikális sajátosságait egy $R: \mathbb{K} \rightarrow \Sigma^*$, a nyelv programkonstruktoraihoz szimbólumsorozatokat rendelő függvény megadásával definiálhatjuk. Ha ez a leképezés nem injektív, a nyelv felszíni szintaxisa környezetfüggő lesz.
 \end{defn}
 
-\begin{defn}[Konzervatív kiterjesztés\protect{\cite[3.2~definíció]{Felleisen90}}]
+\begin{defn}[Konzervatív kiterjesztés\protect{\cite[3.2~definíció]{Felleisen90}}]\label{defn:conservative_extension}
 	Egy $\mathcal{L}$ nyelv $\{K_1 \ldots K_n\}$ elemekkel való konzervatív kiterjesztése egy $\mathcal{L}'$ nyelvnek, ha
 	$ \{K_1 \ldots K_n\} \cap \mathbb{K}_{\mathcal{L}'} = \emptyset$,
 	$\mathbb{K}_\mathcal{L} = \mathbb{K}_{\mathcal{L}'} \cup \{K_1 \ldots K_n\}$,
@@ -87,8 +87,6 @@ Ekkor a programozó által használt $\mathcal{L}'$ nyelv az ideális $\mathcal{
 
 \normalfont Egy programozó nyelvhasználatából egy nyelvi elem hiányozhat technikai megfontolásokból (mert ,,nem hatékony''), mert a használata nem illendő (jó példa erre a \cls{goto} utasítás, ami ugyan a legtöbb nyelvben máig létezik, még olyan modern nyelvekben is, mint a Ruby, de használata a magasszintű programozásban teljesen eltűnt), vagy akár mert nem tud az adott nyelvi elem létezéséről.
 Naivnak tűnhet a feltételezés, hogy egy aktív és képzett programozó nem tud egy nyelvi elemről, de gondoljunk bele, hogy egy nyelv standard könyvtárának függvényei is nyelvi elemek; másrészt a modern programozási nyelvek gyakran nagyon komplexek, emberek számára nehezen megismerhetőek a maguk teljességében.
-
-Például e sorok szerzője csak a múlt év őszén tudtam meg, hogy a Javában létezik konstruktordelegáció: az általam használt Java azóta sokkal jobb minőségű, mint azelőtt.
 \end{defn}
 
 
