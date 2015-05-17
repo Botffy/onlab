@@ -1,0 +1,28 @@
+\begin{tikzpicture}[node distance=1cm,
+	every node/.style={node distance=2cm, },
+	clas/.style={rectangle, rounded corners, draw, fill=blue!10, inner sep=1pt, text width=2.4cm, text badly centered, minimum height=1.2cm, font=\bfseries\sffamily},
+	arr/.style={->, >=latex', shorten >=1pt}
+	]
+
+\node[clas] (parser) {Parser};
+\node[clas, above=of parser] (grammar) {Grammar};
+\node[clas, left=of parser] (lexer) {Lexer};
+\node[clas, below left=2 and 1 of parser] (context) {Context};
+\node[clas, below right=2 and 1 of parser] (typechecker) {Typechecker};
+
+\node[clas, left=of lexer] (source) {Forrásszöveg};
+\node[clas, right=of parser] (interpreter) {AST Interpreter};
+
+\path[arr, every node/.style={font=\itshape\footnotesize,
+  		fill=white,inner sep=3pt}]
+(source) edge node[above] {karakterek} (lexer)
+(parser) edge [bend left=30] node {új állapot} (context)
+(context) edge[bend left=30] node {állapot} (parser)
+(grammar) edge node[above] {szabály} (parser)
+(lexer) edge  node[above] {tokenek} (parser)
+(parser) edge[bend right=30] node {AST-node} (typechecker)
+(typechecker) edge[bend right=30] node {helyes AST-node} (parser)
+(context) edge[bend right=15] node {állapot} (typechecker)
+(parser) edge node[above] {AST} (interpreter);
+
+\end{tikzpicture}
