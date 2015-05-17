@@ -1,46 +1,114 @@
 
-Mint minden szoftverfolyamatnak, a nyelvtervezés első fázisa is a követelményfeltárás: a nyelv feladatterének elemzése, a felhasználói igények felmérése.
+\subsection{Követelményfeltárás}
+
+Mint minden szoftverfolyamatnak, a nyelvtervezés első fázisa is a követelmények feltárása: a nyelv feladatterének elemzése, a felhasználói igények felmérése.
+Célszerű lett volna kérdőíves felmérést végezni elsőéves diákok részvételével, komolyabban kutatni a nyelvek pedagógiai aspektusait, illetve elemezni lehetett volna az egyetem rendelkezésére álló nagyméretű korpuszt; erre viszont erőforrások hiányában nem került sor.
+
 Mivel létező nyelv kiterjesztéséről van szó, elemezni kellett a létező nyelvet is \aref{subsubsec:edulang}. részben ismertetett metrikák szerint.
 
-\subsection{A PLanG programozási nyelv értékelése}
-A PLanG első pillantásra szembetűnő jellegzetessége, hogy kulcsszavai magyar nyelvűek, ami magyar diákok számára növelheti a kulcsszavak szerepkifejező erejét.
-Mégis sok kulcsszó esetlen, furcsa megfogalmazású (\plang{MEGNYIT}, \plang{KI}, \plang{KEREK}, \plang{RND}).
-Míg az angol programozási nyelvek kulcsszavai, függvénynevei rendszerint felszólító módú igéks, addig a PLanG módszeresen főneveket használ, még a függvénynevekre is.
-Az ilyen függvények, utasítások szerepkifejező képessége alacsony (vajon \plang{KEREK 10.5} kerekíti az értéket, vagy azt mondja meg, kerek szám-e az érték? a \plang{NAGY 'z'} azt mondja, nagybetű-e a paraméter vagy nagybetűvé alakít?).
+\subsubsection{A PLanG programozási nyelv értékelése}
+
+
+A PLanG első pillantásra szembetűnő jellegzetessége, hogy kulcsszavai magyar nyelvűek, ami magyar diákok számára növelheti a szerepkifejező erőt.
+Mégis sok kulcsszó esetlen, furcsa megfogalmazású (\plang{MEGNYIT}, \plang{KI}, \plang{KEREK}, \plang{RND}), bár rövid (ami csökkenti a terjengősséget).
+Míg az angol programozási nyelvek kulcsszavai, függvénynevei rendszerint felszólító módú igék, addig a PLanG módszeresen főneveket és mellékneveket használ, még a függvénynevekre is.
+Az ilyen függvények, utasítások szerepkifejező ereje alacsony (vajon \plang{KEREK 10.5} kerekíti az értéket, vagy azt mondja meg, kerek szám-e az érték? a \plang{NAGY 'z'} azt mondja, nagybetű-e a paraméter vagy nagybetűvé alakít?).
 A kulcsszavak közül a \plang{CIKLUS} nem feltétlen érthető egy olyan diáknak, aki még soha nem programozott; szerepkifejezőbb lehetett volna például az *\plang{ISMÉTELD} kulcsszó.
 
-Az operátorok között is vannak alacsony szerepkifejezésű elemek: nem magától értetődő például, hogy a \plang{/=} az áthúzott egyenlőségjel helyett áll, és a \plang{DIV} és a \plang{/} osztások közül sem evidens, melyik melyik.
-Hasonlóképp, bár kis programozói előképzettséggel ,,nyilvánvaló'' a \plang{:=} értékadó utasítás szemantikája, de kezdőknek nem feltétlen az: anekdotikus bizonyíték szerint viszonylag gyakori hiba, hogy a diák nem tudja, melyik oldal adja, és melyik kapja az értéket.
-Valóban, a \plang{:=} csak az Algol nyelvben szerepelt először értékadásként, és jó példája a \textit{memetikus konzisztenciának}, vagyis hogy csak azért csinálunk valamit úgy, mert mások is úgy csinálták, és nem vesszük figyelembe az eltérő igényeket\cite{McIver01}.
-Szintén alacsony a tömbdeklarációk szerepkifejező ereje (\plang{EGÉSZ[5]}), és ez is a memetikus konzisztenciából fakad.
+Az operátorok között is vannak alacsony szerepkifejezésű elemek: az \plang{@} infix operátor jelentése még gyakorlott programozóknak sem nyilvánvaló, de nem magától értetődő az sem, hogy a \plang{/=} az áthúzott egyenlőségjel helyett áll, és a \plang{DIV} és a \plang{/} osztások közül sem evidens, melyik melyik.
+Hasonlóképp, bár kis programozói előképzettséggel ,,nyilvánvaló'' a \plang{:=} értékadó utasítás szemantikája, kezdőknek nem feltétlen az: anekdotikus bizonyíték szerint viszonylag gyakori hiba, hogy a diák nem tudja, melyik oldal adja, és melyik kapja az értéket.
+Valóban, a \plang{:=} jó példája a \textit{memetikus kompatibilitásnak}, vagyis hogy csak azért csinálunk valamit úgy, mert mások is úgy csinálták, és nem vesszük figyelembe az eltérő igényeket\cite[6.1.5.2. rész]{McIver01}.
+Szintén alacsony a tömbdeklarációk szerepkifejező ereje (\plang{EGÉSZ[5]}), ez is a memetikus kompatibilitásra törekvésből fakad.
+
+Az I/O utasítások szerepkifejező ereje viszonylag magas, használatuk kevés szellemi erőkifejtést kíván.
+A szöveg típusú változók I/O-kezelése nem idempotens\footnote{%
+vagyis létezik olyan $x$ szöveg típusú érték, amelyet kiírva, majd a kiírt értéket beolvasva $y$-ba $x \not= y$}%
+, de mivel a beolvasás a sor végéig tart, a leképezés közeliségének szempontjából zavaró esetek száma kisebb, mint olyan nyelvekben, ahol a beolvasás az első szóközig tart. % mindez kicsit esetlen
 
 A leképezés közelisége közepes-alacsony.
 Jól teljesítenek az operátorok, amelyek viselkedésükben és megjelenésükben is megfelelnek a diákok matematikai tudásának.
-Különösen szép, hogy az unáris függvényeket nem kell zárójelezni (\plang{sin x}), és egyedi, ám nagyszerű az elemszám-lekérdezés cirkumfix operátora (\plang{|tomb|}).
-%, bár zavaró lehet a matematikai jelölésben megszokott *\plang{a < b < c} jellegű összehasonlítás hiánya.
-A tömbök viszont már nagyon távol vannak a hallgató gondolkodásától: méretük mindig fix, alapműveleteik hiányoznak.
-Lehet persze avval érvelni, hogy például a tartalmazásvizsgálat megvalósítása a hallgató feladata, így helyes, hogy a PLanGban nincs ilyen művelet -- azonban az absztrakciós eszközök teljes hiánya a hallgatót arra kényszeríti, hogy minden esetben manuálisan, ciklussal végezze el a tartalmazásvizsgálatot, ami csökkenti a robosztusságot és növeli a szellemi erőfeszítést.
-Ismerősebb lenne a tanulóknak egy, a matematikai halmazokhoz hasonló összetett típus.
+Különösen szép, hogy az unáris függvényeket nem kell zárójelezni (\plang{sin x}), és egyedi, ám nagyszerű az elemszám-lekérdezés cirkumfix operátora (\plang{|tomb|}). Zavaró lehet a matematikai jelölésben megszokott *\plang{a < b < c} jellegű asszociatív összehasonlítás hiánya.
+Nehézséget jelenthet az \plang{EGÉSZ} és \plang{VALÓS} típusok megkülönböztetése, közelebb állna a diákok gondolkodásához egy egyszerű *\plang{SZÁM} típus.
 
-A nyelvtan szép, letisztult. Nagy erény, hogy nincs szükség utasításlezáró jelre, ez nagyban csökkenti a ,,becsúszó'' hibák valószínűségét.
+A fix méretű tömbök valamelyest távol vannak a hallgatók gondolkodásától: ismerősebb lenne a tanulóknak egy, a matematikai halmazokra jobban emlékeztető típus.
+A tömböknek ráadásul nagyok kevés művelete van: lehet persze úgy érvelni, hogy műveletek megvalósítása a hallgató feladata, ebből tanulnak -- azonban az absztrakciós eszközök teljes hiánya a hallgatót arra kényszeríti, hogy minden esetben külön, manuálisan, ciklussal végezze el a műveleteket, ami csökkenti a robosztusságot és növeli a szellemi erőfeszítést.
+
+A nyelvtan szép, letisztult, előreolvasást nem igénylő LL(1)-es nyelvtan. Nagy erénye, hogy nincs szükség utasításlezáró jelre, ez jelentősen csökkenti a ,,becsúszó'' hibák\cite[ld.][4.2.2 rész]{McIver01} valószínűségét.
+A legtöbb hibalehetőséget a változódeklarációs rész teremti, mert a PLanG nem deklarációs blokkot, hanem címkézett felsorolást használ, és a felsorolásból nagyon könnyű elhagyni a vesszőt.
+Az így keletkezett hibát nehéz feladat detektálni\footnote{
+	\cls{AZONOSÍTÓ, KETTŐSPONT, TÍPUSNÉV, AZONOSÍTÓ} tokensorozat esetén előreolvasás nélkül nem eldönthető, hogy az utolsó azonosító értékadás kezdetét jelöli-e, vagy  kimaradt a vessző a deklarációk felsorolásából.
+}%
+, a referenciaimplementáció nem is teszi meg.
+A deklarációs rész a nyelv viszkozitását is növeli: új változó bevezetéséhez a használat helyétől távosli deklarációs részt kell szerkeszteni, amit nehezít a hibavonzó szintaxis.
+Általában, a deklarációs rész jó példája a gép- és nem emberorientált tervezésnek: az emberek számára csak csekély haszna van, elsősorban a gépek számára hasznos, megkönnyíti a feldolgozást és a kódgenerálást.
 
 A PLanG egyáltalán nem nyújt absztrakciós eszközöket, a programozó semmilyen formában nem változtathat a nyelven.
-Az alprogramok hiánya nagyban növeli a terjengősséget és a szellemi erőfeszítést, a felhasználó által definiált típusok hiánya csökkenti a robosztusságot és a módszertani helyességet.
+Az alprogramok hiánya nagyban növeli a terjengősséget és nagyobb szellemi erőfeszítést kíván, a felhasználó által definiált típusok hiánya csökkenti a robosztusságot és a módszertani helyességet.
+
+Módszertani helyességet támogató eszközök nincsenek: dedikált hibakezelési eszköz hiányában a tanuló nem sajátíthatja el a megfelelő hibakezelést; a nyelv a megjegyzéseken kívül nem kínál strukturált, formális eszközt az előfeltételek és utófeltételek rögzítésére (holott a tárgy ezek használatára hangsúlyt helyez)
+
+Ezen kívül hiányzik a nyelvből egy \cls{elsif} konstrukció és a deklarációval egybekötött változóincializálás lehetősége. Bár mindkettő kifejezhető a PLanG programkonstruktoraival, az így kapott szerkezetek olvasása nehezebb, írása kevésbé hibatűrő.
 
 
+\subsubsection{A futtatókörnyezet értékelése}
+A PLanG használata a tanulók számára elválaszthatatlan a grafikus futtatókörnyezet használatától, így a nyelv elemzéséhez hozzátartozik a futtatókörnyezet hasznosságának és használhatóságának vizsgálata is.
+
+Kétségkívül hasznos a kifejezésfát és a memóriamodellt kirajzoló modul, bár haszánalatuk nem intuitív.
+A programszerkesztő modul nagyon primitív, komolyan hiányzik a szintaxiskiemelés, zárójelpárosság-ellenőrző.
+Az alapvető editorfunkciók közül hiányzik a tabulátor méretének megadásának lehetősége, a legutóbb szerkesztett file-ok megnyitásának lehetősége.
+A gombsorban a nagy zöld ,,Futtatás'' gomb jó használhatóságú, de például az ,,Értelmezés'' és az ,,Értelmezett program szerkesztése'' gombok közötti különbség egyáltalán nem világos.
+
+A futtatókörnyezet nem interaktív, a programok előre bekészített bemenetekkel dolgoznak,
+
+A futtatókörnyezet által biztosított filekezelés nagyon zavaró, nem intuitív: nem valódi, hanem virtuális file-okkal dolgozik.
+Ez rendszerint megzavarja a tanulókat, magyarázatot igényel, és csökkenti a tanuló PLanGba vetett hitét, csökkenti motivációját.
+
+\begin{table}[tb]
+	\centering
+	\begin{tabular}{ r c c }
+						& \bfseries PLanG	 & \bfseries ideális \\\hline
+		\bfseries absztrakció 		&\cellcolor{red!30}nincs & alacsony \\
+		\bfseries hibák vonzása 	&\cellcolor{red!30}közepes-magas & nagyon alacsony \\
+		\bfseries konzisztensség 	&\cellcolor{blue!30}közepes & közepes  \\
+		\bfseries leképezés közelisége &\cellcolor{red!30}közepes-alacsony & nagyon magas \\
+		\bfseries szellemi erőfeszítés &\cellcolor{green!30}alacsony-közepes & alacsony \\
+		\bfseries szerepkifejezés &\cellcolor{green!30}közepes-magas	& magas \\
+		\bfseries terjengősség &\cellcolor{blue!30}közepes	& közepes \\
+		\bfseries viszkozitás &\cellcolor{red!30}közepes-magas	& alacsony
+	\end{tabular}
+	\caption{A PLanG kognitív dimenziói az ideális értékekkel összehasonlítva}
+	\label{tab:plangminmut}
+\end{table}
+
+\subsubsection{Összegzés}
+A PLanG kifejlesztésének célja az volt, hogy az addig papíron írt pszeudokódot futtathatóvá tegye, egy procedurális programok működését bemutathatóvá, boncolgathatóvá tegye\cite{lovei}.
+Bár ennek a célnak jól megfelelt, aktívan használt, a kurzus alapjaként szolgáló oktatási célú programozási nyelvként használhatósági mutatói meglehetősen rosszak (lásd \aref{tab:plangminmut}. táblázatot).
 
 
+\subsubsection{Ajánlások}
+Alapvető fontosságú alprogramok és összetett típusok definiálásának lehetősége, ez növelné a nyelv hasznosságát, és javítana több használhatósági dimenzión is.
+
+A használhatóság tekintetében sokat nyernénk a deklarációs lista blokká alakításával, vagy akár a változók szabad, programtörzsön belüli deklarációjának engedésével. Engedni kellene a változó deklarációval egybekötött inicializálását.
+
+A nyelv szerepkifejező ereje növelhető lenne a függvénynevek felszólító módú igévé átalakításával, még ha ezzel a programszöveg ,,gyerekesebbnek'' is tűnik.
+
+Kevés költséggel járna egy \cls{assertion} konstrukció implementálása, amely eszközt biztosítana az előfeltételek, utófeltételek kezelésére.
+Szintén olcsó, de a hasznosságot növelő elem egy \cls{hiba} konstrukció, amely lehetővé tenné a programozónak a hiba precíz jelzését.
+
+Ajánlott lenne a tömbök kezelésének egyszerűsítése, például egy \cls{foreach} konstrukció bevezetésével, de egy dinamikusabb tömb típus bevezetése is előnyös lehet.
 
 
-% \subsection{tervezési céloks és döntések}
+\subsection{Tervezési döntések, célok}\label{subsec:plans}
+
 % szintaxis és szemantika szeparációja
 
 %..
 % java
 
-% \subsection{Célok megvalósulása/postmortem}
+% \subsection{A tervezési döntések értékelése}
+% \Aref{subsec:plans}
 % túlzott generalizáció
 % java
 % more is more error in langdesign
 
-%Célszerű lett volna kérdőíves felmérést végezni elsőéves diákok részvételével, komolyabban kutatni a nyelvek pedagógiai aspektusait, illetve elemezni lehetett volna az egyetem rendelkezésére álló nagyméretű korpuszt; erre viszont erőforrások hiányában nem került sor.
+%

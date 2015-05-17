@@ -88,7 +88,7 @@ Ekkor a programozó által használt $\mathcal{L}'$ nyelv az ideális $\mathcal{
 \normalfont Egy programozó nyelvhasználatából egy nyelvi elem hiányozhat technikai megfontolásokból (mert ,,nem hatékony''), mert a használata nem illendő (jó példa erre a \cls{goto} utasítás, ami ugyan a legtöbb nyelvben máig létezik, még olyan modern nyelvekben is, mint a Ruby, de használata a magasszintű programozásban teljesen eltűnt), vagy akár mert nem tud az adott nyelvi elem létezéséről.
 Naivnak tűnhet a feltételezés, hogy egy aktív és képzett programozó nem tud egy nyelvi elemről, de gondoljunk bele, hogy egy nyelv standard könyvtárának függvényei is nyelvi elemek; másrészt a modern programozási nyelvek gyakran nagyon komplexek, emberek számára nehezen megismerhetőek a maguk teljességében.
 
-Egy személyes példa: csak a múlt év őszén tudtam meg, hogy a Javában létezik konstruktordelegáció: az általam használt Java azóta sokkal jobb minőségű, mint azelőtt.
+Például e sorok szerzője csak a múlt év őszén tudtam meg, hogy a Javában létezik konstruktordelegáció: az általam használt Java azóta sokkal jobb minőségű, mint azelőtt.
 \end{defn}
 
 
@@ -173,16 +173,16 @@ A kognitív dimenziók optimális értékei a kifejezetten a programozás alapja
 A Java nyelvben például már a legegyszerűbb program írásához találkozni kell az objektumosztály fogalmával.
 
 \paragraph{Hibák vonzása -- nagyon alacsony} A hiba frusztrálja és elbizonytalanítja a tanulót, a nyelvtervezés során minden áron törekedni kell a programozói hibalehetőségek minimalizálására.
-Az C++ utasításlezáró pontosvesszője például gyakori hibaforrás, amit a kezdők nehezen is azonosítanak, hiszen a \cls{gcc} fordítóprogram hibaüzenete szót sem ejt pontosvesszőről.
+Az C++ utasításlezáró pontosvesszőjének elhagyása például gyakori hiba, amit a kezdők nehezen is azonosítanak, hiszen a \cls{gcc} fordítóprogram hibaüzenete szót sem ejt pontosvesszőről.
 
 \paragraph{Konzisztensség -- közepes} A konzisztensség segíthet a tanulónak, hiszen ha elsajította egy nyelvi elem használatát, akkor automatikusan használni fogja tudni a hasonló nyelvi elemeket.
 Ugyanakkor nem biztos, hogy a kezdő képes felismerni egy szemantikai hasonlóságot két nyelvi elem között, illetve nem tudja kihasználni az elvi hasonlóságot.
-Jó példa a túlzásba vitt konzisztensségre a Turing nyelv tömbelem-lekérdező operátora, ami ugyanúgy sima zárójelként jelenik meg, mint a függvényhívás, mondván, hogy mindkettő értéklekérés; a diák ugyanakkor egy \cls{A(1)} konstrukciót látva nem tudja eldönteni, hogy \cls{A} változó-e vagy függvény.
+Jó példa a túlzásba vitt konzisztensségre a Turing és az Ada nyelvek tömbelem-lekérdező operátora, ami ugyanúgy sima zárójelként jelenik meg, mint a függvényhívás, mondván, hogy mindkettő értéklekérés; a diák ugyanakkor egy \cls{A(1)} konstrukciót látva nem tudja eldönteni, hogy \cls{A} változó-e vagy függvény.
 
 \paragraph{Leképezés közelisége -- nagyon magas} A nyelvnek illeszkednie kell a tanulók feladatához és megoldásához, tükröznie kell a tanulók létező ismereteihez, világképéhez; de mutatnia kell az elsajátítandó világképet is.
 A Pascal oktatónyelv például jó leképezése egy ideális virtuális gépnek, de a kezdők világképétől távol áll, ami különösen a tömbök és a karakterláncok nehézkes kezelésénél szembetűnő.
 
-\paragraph{Szellemi erőfeszítés -- alacsony} A programozás során elkerülhetetlen a szellemi erőfeszítés, de nem szabad, hogy a nyelv használata szükségtelenül nehezítse a feladat megoldását. A Scheme oktatónyelvben például a lambda-kalkulushoz való idomulás nehéz feladat a kezdő programozónak.
+\paragraph{Szellemi erőfeszítés -- alacsony} A programozás során elkerülhetetlen a szellemi erőfeszítés, de nem szabad, hogy a nyelv használata szükségtelenül nehezítse a feladat megoldását. A Scheme oktatónyelvben például a lambda-kalkulus igényeihez idomulás nehéz feladat a kezdő programozónak.
 
 \paragraph{Szerepkifejezés -- magas} Jól megválasztott felszíni szintaxis mellett a tanuló sokkal könnyebben olvashat és érthet meg programokat.
 Egy jó szerepkifejezésű nyelvi elem nem igényel különösebb magyarázatot, használata azonnal értetődő.
