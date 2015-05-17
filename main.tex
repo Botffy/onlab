@@ -22,8 +22,10 @@
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{enumitem}
+\usepackage{tikz}
 \usepackage[hidelinks, unicode]{hyperref}
 
+\usetikzlibrary{positioning,shapes,arrows,shadows}
 
 \DeclareQuoteStyle{magyar}%
   {\quotedblbase}
@@ -46,7 +48,6 @@
 \newcommand{\cls}[1]{\texttt{#1}}
 
 \newcommand{\plang}[1]{{\color{blue}\texttt{#1}}}
-
    
 \begin{document}
 \pagenumbering{roman}
@@ -89,6 +90,7 @@ Dr.~Feldhoffer Gergely
 \newpage
 \section{Fordítóprogramok}
 \label{sec:fordprog}
+\input{parts/fordprog.tex}
 
 \newpage
 \section{Az XPLanG programozási nyelv}
