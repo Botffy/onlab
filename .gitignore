@@ -1,5 +1,5 @@
 # latex
-*.pdf
+main.pdf
 *.aux
 *.ps
 *.dvi
