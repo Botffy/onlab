@@ -1,0 +1,39 @@
+\begin{tikzpicture}[
+	clas/.style={rectangle, rounded corners, draw, fill=blue!10, inner sep=4pt, text width=6em, text centered, minimum height=2em, font=\bfseries\sffamily\small},
+	arr/.style={->, >=latex', shorten >=1pt}
+	]
+
+\node (input) {};
+\node[clas] (lexer) [right=of input] {Lexikális elemző};
+\node[clas] (parser) [right=of lexer] {Szintaktikus elemző};
+\node[clas] (semantics) [right=of parser] {Szemantikus elemző};
+
+\node[clas] (codegen) [right=3 of semantics] {Kódgenerátor};
+\node[clas] (optimize) [right=of codegen] {Optimalizáló};
+\node (output) [right=of optimize] {};
+%\node (error-out) [above=of parser] {};
+
+\begin{scope}[on background layer]
+	\node[
+		rectangle, rounded corners, draw, fill=blue!10, fill opacity=0.4, inner sep=0.8em,
+		label={below:{\bfseries\sffamily Analízis}},
+		fit=(lexer) (parser) (semantics)
+	] (analysis){};
+
+	\node[
+		rectangle, rounded corners, draw, fill=blue!10, fill opacity=0.4, inner sep=0.8em,
+		label={below:{\bfseries\sffamily Szintézis}},
+		fit=(codegen) (optimize)
+	] (synthesis){};
+\end{scope}
+
+\path[arr, every node/.style={font=\itshape\footnotesize,
+  		fill=white,inner sep=3pt}]
+(input) edge (lexer)
+(lexer) edge (parser)
+(parser) edge (semantics)
+(semantics) edge node[above] {Belső} node[below] {reprezentáció} (codegen)
+(codegen) edge (optimize)
+(optimize) edge (output);
+
+\end{tikzpicture}

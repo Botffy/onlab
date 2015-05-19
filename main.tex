@@ -25,7 +25,7 @@
 \usepackage{tikz}
 \usepackage[hidelinks, unicode]{hyperref}
 
-\usetikzlibrary{positioning,shapes,arrows,shadows}
+\usetikzlibrary{positioning,shapes,arrows,backgrounds,fit}
 
 
 \DeclareQuoteStyle{magyar}%
@@ -51,6 +51,7 @@
 \newcommand{\plang}[1]{{\color{blue}\texttt{#1}}}
    
 \begin{document}
+\pagestyle{empty}
 \pagenumbering{roman}
 \begin{titlepage}
 \newlength\drop
@@ -75,14 +76,23 @@ Dr.~Feldhoffer Gergely
 \vspace*{\drop}
 
 \end{titlepage}
+\newpage
+
+\vspace*{\fill}
+\begin{center}
+A beszámoló elektronikus formában a\\
+\url{http://users.itk.ppke.hu/~sciar/onlab.pdf}\\
+címen érhető el.
+\end{center}
+
 \cleardoublepage
-\includepdf{parts/elolap.pdf}
-\cleardoublepage
-\thispagestyle{empty}
+%\includepdf{parts/elolap.pdf}
+%\cleardoublepage
 \tableofcontents
 
 \newpage
 \setcounter{page}{1}
+\pagestyle{plain}
 \pagenumbering{arabic}
 \section{Programozási nyelvek}
 \label{sec:proglang}
@@ -94,12 +104,12 @@ Dr.~Feldhoffer Gergely
 \input{parts/fordprog.tex}
 
 \newpage
-\section{Az XPLanG programozási nyelv}
+\section{A PLanG programozási nyelv kiterjesztése}
 \label{sec:xplang}
 \input{parts/xplang.tex}
 
 
 \newpage
-\printbibliography
+\printbibliography[heading=bibintoc]
 
 \end{document}

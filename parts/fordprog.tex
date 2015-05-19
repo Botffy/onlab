@@ -1,3 +1,57 @@
 
+Formálisan a fordítóprogram egy $T: \mathbb{P}_\mathcal{L} \rightarrow \mathbb{P}_{\mathcal{L}'}$ transzformációs függvény, melyre $\forall P \in \mathbb{P}_\mathcal{L}: eval_\mathcal{L}(P) \Rightarrow eval_{\mathcal{L}'}(T(P))$.
+$\mathcal{L}$-t \textbf{forrásnyelv}nek, $\mathcal{L}'$-t pedig \textbf{tárgynyelv}nek nevezzük.
+A forrásnyelv általában magasszintű, a tárgynyelv pedig alacsonyabb szintű, például assembly-szintű, vagy gépi kódú nyelv: az ilyen átalakítást végző programot \textit{compiler}nek nevezzük\cite{Csornyei}.
+
+A compiler feladata a gyakorlatban az, hogy a forrásnyelvi programot az embereknek szánt, szöveges formából a gép számára futtatható programmá alakítsa.
+
+\subsection{A compiler általános felépítése}
+A compiler feladatát két jól elkülöníthető részfeladatra bontjuk: az \textbf{analízis} fázisában a forrásnyelvi programot elemzi, és az arről nyert tudást a program egy \textbf{belső reprezenzáció}nak nevezett struktúrában tárolja; majd a \textbf{szintézis} fázisában a belső reprezentáció alapján felépíti a tárgynyelvi programot\cite{Csornyei}\cite{torczon_cooper}.
+
+\begin{figure}[htb]
+	\centering
+	\resizebox{\textwidth}{!}{\input{parts/figures/compiler.tex}}
+	\caption{A compiler felépítése.}
+\end{figure}
+
+Az analízis első feladata, hogy a forrásnyelvi programot reprezentáló karaktersorozatot a nyelv lexikális elemeit reprezentáló szimbólumok sorozatára bontsa.
+Ezt a feladatot a \textit{lexikális elemző} végzi.
+A kapott szimbólumsorozatot a \textit{szintaktikus elemző} vizsgálja tovább, a szekvenciális mondatból próbálja felállítani a program hierarchikus struktúráját: azt a kérdést próbálja megválaszolni, hogy egy formális nyelvtan milyen levezetése adja ki a kapott mondatot.
+Ha a program szintaktikailag helyesnek bizonyul, akkor tovább elemzi a \textit{szemantikus elemző}, amelynek feladata, hogy ellenőrizze, megfelel-e a program a statikus szemantika szabályainak.
+
+Az analízis kimenete a belső reprezenztáció, amely a forrásnyelvi programmal szemantikailag ekvivalens \textit{köztesnyelv}i program.
+A belső reprezentáció a gyakorlatban sokféle lehet: valamilyen fastruktúra, valamilyen absztrakt utasítások szekvenciális sorozata.\cite{torczon_cooper}
+
+A szintézis során a \textit{kódgenerátor} a belső reprezentáció minden egységéhez szemantikailag ekvivalens tárgynyelvi utasítást rendel.
+A kapott tárgynyelvi programon a \textit{kódoptimalizáló} további transzformációkat végez, hogy növelje a kapott program hatékonyságát.
+
+
+\subsection{A környezetfüggetlen analízis eszközei}
+Miután a lexikális elemző a program szövegét a forrásnyelv felszíni szintaxisát leíró $G$ környezetfüggetlen nyelvtan terminális szimbólumainak $s$ sorozatává, a nyelv \textit{mondat}ává, alakította, a szintaktikus elemző feladata konstruktívan bizonyítani, hogy $s$ valóban levezethető $G$-ből.
+A bizonyítás konstruktív volta az jelenti, hogy az elemző algoritmus ténylegesen megadja az $s$-t generáló levezetési fát.
+Egy nyelvtant \textit{nemegyértelmű}nek mondunk, ha létezik hozzá olyan mondat, amely többféleképpen levezethető, ami avval jár, hogy különböző elemzésekhez különböző tárgyprogramok tartoznak -- ez nem kívánatos tulajdonság.
+
+A környezetfüggetlen analízis jól kutatott, megoldottnak tekinthető probléma\footnote{
+	Ami nem jelenti, hogy ne lenne fejlődés, ne születnének máig újabb, hatékonyabb algoritmusok, megközelítések: például Bryan Ford 2004-ben ismertette a Chomsky-nyelvosztályokból kilépő \textit{Parsing Expression Grammar} nevű szintaktikai elemzőt\cite{Ford04PEG}.
+}.
+Early 1968-ban adott algoritmust, amely tetszőleges környezetfüggetlen nyelvtant $\mathcal{O}(n^3)$ időben elemez, azonban sok algoritmus létezik, amely a környezetfüggetlen nyelvek halmazának valamely részhalmazába tartozó nyelveket ennél hatékonyabban, vagy egyszerűbben implementálható módon elemzi.
+A legfontosabb ilyen nyelvosztályok az $LR(1)$ grammatikák, az $LL(k)$ és az $LL(1)$ grammatikák osztálya.
+Az ezen nyelvosztályokat meghatározó algoritmusokkal könnyen automatizálható módon \textit{elemző táblázat}okat építhetünk a nyelvhez, amelyek lineáris időben képesek feldolgozni a bemeneti karaktersort\footnote{%
+	Ezen és egyéb elemző algoritmusok leírásáért lásd \cite[4-6.~fejezetek]{Csornyei}.
+}.
+Az ilyen elemző táblázatokat építő automatizáló eszközöket az iparban széles körűen használják.
+Ilyen például a híres \textit{YACC}, illetve nyílt forráskódú változata, a \textit{GNU bison} (módosított $LR(1)$ elemzők), és a modernebb, Java-alapú \textit{ANTLR} (módosított $LL(k)$ elemző).
+
+Az automatizált elemzőgenerátorok hasznos eszközök, de a fordítóprogramok tervezői gyakran mégis kézzel írják meg az elemzőt.
+Régi, elterjedt, bevált módszer a \textit{rekurzív leszállásos elemzés} módszere, melynek lényege, hogy a nyelvtan minden nemterminális szimbólumához a szimbúlum helyettesítési szabályát mgvalósító eljárást rendelve, egy vagy több előreolvasott szimbólum alapján döntést hozva, az implementációs programozási nyelv végrehajtási vermét használva szimulálunk veremautomatát.
+A rekurzív leszállásos elemező előnye a táblázatos módszerekkel szemben, hogy nagyon könnyű megvalósítani, lehetőséget ad informatív hibaüzenetek generálására, és jól olvasható is, amennyiben az elemzőt végignézve megismerhetjük a nyelvtant.
+További előny, hogy az eljárásokban megkötés nélkül ki tudjuk használni a Turing-teljes implementációs nyelv teljes eszközkészletét, vagyis a szimulált veremautomatánk kifejezőerejét tetszés szerint növelhetjük -- igaz, az implementációs komplexitás kárára.
+Rekurzív leszállásos elemzőt használ például a Lua programozási nyelv fordítóprogramja.
+
+
+
+
+
 % LL(1)
 % recdesc
+% operator problem, landin?, pratt

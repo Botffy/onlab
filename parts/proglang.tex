@@ -66,7 +66,7 @@ Felleisen $eval_\mathcal{L}$-t olyan predikátumként definiálja, ami akkor iga
 		}.
 	\end{itemize}
 
-	\normalfont Az így meghatározott absztrakt nyelv lexikális sajátosságait egy $R: \mathbb{K} \rightarrow \Sigma^*$, a nyelv programkonstruktoraihoz szimbólumsorozatokat rendelő függvény megadásával definiálhatjuk. Ha ez a leképezés nem injektív, a nyelv felszíni szintaxisa környezetfüggő lesz.
+	\normalfont Az így meghatározott absztrakt nyelv lexikális sajátosságait egy $R: \mathbb{K} \rightarrow \Sigma^*$, a nyelv programkonstruktoraihoz karaktersorozatokat rendelő függvény megadásával definiálhatjuk. Ha ez a leképezés nem injektív, a nyelv felszíni szintaxisa környezetfüggő lesz.
 \end{defn}
 
 \begin{defn}[Konzervatív kiterjesztés\protect{\cite[3.2~definíció]{Felleisen90}}]\label{defn:conservative_extension}
@@ -136,7 +136,7 @@ Látható, hogy a nyelv kifejezőerejét megsokszorozza egy szintaktikai absztra
 \subsubsection{Hasznosság és használhatóság}
 \label{subsec:utility_and_usefulness}
 A programozási nyelv az ember és gép közötti kommunikáció eszköze, ezért értelmezhetőek rá a felhasználói felületek minőségi mutatói\cite{McIver01}.
-Egy programozási nyelv \textbf{hasznos} (\textit{useful}) ha lehetővé teszi, hogy a programozó gyorsan és hatékonyan írja meg a feladatát megvalósító programot. A hasznosság fő metrikái:
+Egy programozási nyelv \textbf{hasznos} (\textit{useful}) ha lehetővé teszi, hogy a programozó gyorsan és hatékonyan írja meg a feladatát megvalósító programot\cite{Csornyei}. A hasznosság fő metrikái:
 \begin{description}
 	\item[Kifejezőerő] Két nyelv közül a nagyobb kifejezőerejű a hasznosabb. Ez ugyan reláció, és nem metrika, de a nyelv szintaktikai absztrakciós eszközeinek száma és minősége jó becslés egy abszolút kifejezőerőre.
 	\item[Robosztusság] A programozó hibája nem járhat katasztrofális következményekkel. A nyelv robusztus, ha nyelvi elemei lehetővé teszik a hatékony hibadetektálást.

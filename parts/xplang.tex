@@ -77,8 +77,9 @@ Ez rendszerint megzavarja a tanulókat, magyarázatot igényel, és csökkenti a
 	\label{tab:plangminmut}
 \end{table}
 
+
 \subsubsection{Összegzés}
-A PLanG kifejlesztésének célja az volt, hogy az addig papíron írt pszeudokódot futtathatóvá tegye, egy procedurális programok működését bemutathatóvá, boncolgathatóvá tegye\cite{lovei}.
+A PLanG kifejlesztésének célja az volt, hogy az addig papíron írt pszeudokódot futtathatóvá tegye, illetve hogy eszközt adjon a procedurális programok működésének demonstrálására, elemzésére\cite{lovei}.
 Bár ennek a célnak jól megfelelt, aktívan használt, a kurzus alapjaként szolgáló oktatási célú programozási nyelvként használhatósági mutatói meglehetősen rosszak (lásd \aref{tab:plangminmut}. táblázatot).
 
 
@@ -126,7 +127,9 @@ Szép cél volt ugyan az, hogy minden PLanG program legyen érvényes XPLanG pro
 A változtatható lexikális elemek a kulcsszavak problémájára megoldást nyújtanak, de a deklarációs lista súlyos problémái megmaradtak.
 
 Nem volt egészen szerencsés választás a Java sem: a korlátlan hordozhatóság szép cél ugyan, de hasonló eredményt érünk el, ha a népszerű operációs rendszerekre fordított bináris állományokat terjesztjük, az egzotikusabb rendszerekhez pedig biztosítjuk a fordítás lehetőségét.
-Ezzel szemben a Java határozott objektumorientáltsága gyakran nehezítette a tisztán imperatív XPLanG fejlesztését, többször objektumelvű gondolatok szivárogtak bele a tervezésbe; ez különösen a típusrendszer alakításánál jelentett gondot.
+
+Ezzel szemben gondot okozott, hogy a Java virtuális gép indulása sok időt vesz igénybe, így a Javában írt parancssoros fordítóprogram növeli a nyelv effektív viszkozitását.
+A Java határozott objektumorientáltsága is gyakran nehezítette a tisztán imperatív XPLanG fejlesztését, többször objektumelvű gondolatok szivárogtak bele a tervezésbe; ez különösen a típusrendszer alakításánál jelentett gondot.
 De ha már Javát használtam, sok gondot megspórolhattam volna külső könyvtárak szabadabb használatával: függőségkezelő eszközök használatával a külső könyvtárak kezelése kezdőknek sem nehéz feladat.
 Szintén érdemes lett volna kihasználni a Java 8 nyújtotta lehetőségeket.
 
