@@ -33,7 +33,7 @@ Nehézséget jelenthet az \plang{EGÉSZ} és \plang{VALÓS} típusok megkülönb
 A fix méretű tömbök valamelyest távol vannak a hallgatók gondolkodásától: ismerősebb lenne a tanulóknak egy, a matematikai halmazokra jobban emlékeztető típus.
 A tömböknek ráadásul nagyok kevés művelete van: lehet persze úgy érvelni, hogy műveletek megvalósítása a hallgató feladata, ebből tanulnak -- azonban az absztrakciós eszközök teljes hiánya a hallgatót arra kényszeríti, hogy minden esetben külön, manuálisan, ciklussal végezze el a műveleteket, ami csökkenti a robosztusságot és növeli a szellemi erőfeszítést.
 
-A nyelvtan szép, letisztult, előreolvasást nem igénylő LL(1)-es nyelvtan. Nagy erénye, hogy nincs szükség utasításlezáró jelre, ez jelentősen csökkenti a ,,becsúszó'' hibák\cite[ld.][4.2.2 rész]{McIver01} valószínűségét.
+A nyelvtan szép, letisztult, előreolvasást nem igénylő $LL(1)$-es nyelvtan. Nagy erénye, hogy nincs szükség utasításlezáró jelre, ez jelentősen csökkenti a ,,becsúszó'' hibák\cite[ld.][4.2.2 rész]{McIver01} valószínűségét.
 A legtöbb hibalehetőséget a változódeklarációs rész teremti, mert a PLanG nem deklarációs blokkot, hanem címkézett felsorolást használ, és a felsorolásból nagyon könnyű elhagyni a vesszőt.
 Az így keletkezett hibát viszonylag nehéz feladat detektálni, a referenciaimplementáció nem is teszi meg.
 A deklarációs rész a nyelv viszkozitását is növeli: új változó bevezetéséhez a használat helyétől távosli deklarációs részt kell szerkeszteni, amit nehezít a hibavonzó szintaxis.
@@ -65,12 +65,12 @@ Ez rendszerint megzavarja a tanulókat, magyarázatot igényel, és csökkenti a
 	\begin{tabular}{ r c c }
 						& \bfseries PLanG	 & \bfseries ideális \\ \hline
 		\bfseries absztrakció 		&\cellcolor{red!30}nincs & alacsony \\
-		\bfseries hibák vonzása 	&\cellcolor{red!30}közepes-magas & nagyon alacsony \\
-		\bfseries konzisztensség 	&\cellcolor{yellow!30}közepes & közepes  \\
+		\bfseries hibák vonzása 	&\cellcolor{red!30}közepes & nagyon alacsony \\
+		\bfseries konzisztensség 	&\cellcolor{green!30}közepes & közepes  \\
 		\bfseries leképezés közelisége &\cellcolor{red!30}közepes-alacsony & nagyon magas \\
-		\bfseries szellemi erőfeszítés &\cellcolor{green!30}alacsony-közepes & alacsony \\
-		\bfseries szerepkifejezés &\cellcolor{green!30}közepes-magas	& magas \\
-		\bfseries terjengősség &\cellcolor{yellow!30}közepes	& közepes \\
+		\bfseries szellemi erőfeszítés &\cellcolor{red!30}közepes & alacsony \\
+		\bfseries szerepkifejezés &\cellcolor{yellow!30}közepes-magas	& magas \\
+		\bfseries terjengősség &\cellcolor{yellow!30}alacsony-közepes	& közepes \\
 		\bfseries viszkozitás &\cellcolor{red!30}közepes-magas	& alacsony
 	\end{tabular}
 	\caption{A PLanG kognitív dimenziói az ideális értékekkel összehasonlítva}
