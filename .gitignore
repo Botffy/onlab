@@ -12,6 +12,11 @@ main.pdf
 *.bbl
 *.blg
 
+# beamer
+*.nav
+*.snm
+szlajdok.pdf
+
 # dunno, really, maybe texworks
 *.out
 *.synctex.gz
