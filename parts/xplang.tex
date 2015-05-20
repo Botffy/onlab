@@ -51,7 +51,7 @@ Ezen kívül hiányzik a nyelvből egy \cls{elsif} konstrukció és a deklaráci
 A PLanG használata a tanulók számára elválaszthatatlan a grafikus futtatókörnyezet használatától, így a nyelv elemzéséhez hozzátartozik a futtatókörnyezet hasznosságának és használhatóságának vizsgálata is.
 
 Kétségkívül hasznos a kifejezésfát és a memóriamodellt kirajzoló modul, bár haszánalatuk nem intuitív.
-A programszerkesztő modul nagyon primitív, hiányzik a szintaxiskiemelés, zárójelpárosság-ellenőrző, undo funckionalitás, gyorsbillentyűk nincsenek.
+A programszerkesztő modul nagyon primitív, hiányzik a szintaxiskiemelés, zárójelpárosság-ellenőrző (ez növeli a hibák vonzását), undo funckionalitás, gyorsbillentyűk nincsenek (ez növeli a viszkozitást).
 Az alapvető editorfunkciók közül hiányzik a tabulátor méretének megadásának lehetősége, a legutóbb szerkesztett file-ok megnyitásának lehetősége.
 A gombsorban a nagy zöld ,,Futtatás'' gomb jó használhatóságú, de például a ,,Szerkesztés'' és az ,,Értelmezett program szerkesztése'' gombok közötti különbség egyáltalán nem világos.
 
@@ -106,7 +106,7 @@ Már a projekt ötletének felmerülésekor volt egy olyan hátsó szándékom, 
 Azt is eldöntöttem, hogy automatizált parser generátor használata helyett kézzel fogok rekurzív leszállásos elemzőt írni, egyrészt demonstratív jellege miatt, másrészt mert megkönnyíti az informatív hibaüzenetek generálását.
 
 Minél általánosabb fordítóprogramot akartam írni, egy  keretrendszer-félét, amely felszíni szintaxissal paraméterezhető.
-Az volt az álmom, hogy több leszármazott nyelvet kezeljen a program: a PLanGot, a PLanG apró felhasználhatósági javításokkal ellátott kiterjesztését, majd az; ráadásul azt is szerettem volna elérni, hogy a lexikális tulajdonságok minél könnyebben testreszabhatóak legyenek (\cite{Balogh12} inspirált), például azért, hogy külföldi vendéghallgatók is tudják használni a nyelvet.
+Az volt az álmom, hogy több leszármazott nyelvet kezeljen a program: a PLanGot, a PLanG apró felhasználhatósági javításokkal ellátott kiterjesztését, majd még több, egyre jobban kiterjesztett PLanG változatokat; ráadásul azt is szerettem volna elérni, hogy a lexikális tulajdonságok minél könnyebben testreszabhatóak legyenek (erre \cite{Balogh12} inspirált), például azért, hogy külföldi vendéghallgatók is tudják használni a nyelvet.
 
 A fenti döntések utólagos értékeléséért lásd \aref{subsec:planres} részt.
 

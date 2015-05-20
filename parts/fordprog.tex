@@ -34,7 +34,7 @@ Egy nyelvtant \textit{nemegyértelmű}nek mondunk, ha létezik hozzá olyan mond
 A környezetfüggetlen analízis jól kutatott, megoldottnak tekinthető probléma\footnote{
 	Ami nem jelenti, hogy ne lenne fejlődés, ne születnének máig újabb, hatékonyabb algoritmusok, megközelítések: például Bryan Ford 2004-ben ismertette a Chomsky-nyelvosztályokból kilépő \textit{Parsing Expression Grammar} nevű nyelvosztályt és az ezen alapuló szintaktikai elemzőt\cite{Ford04PEG}.
 }.
-Early 1968-ban adott algoritmust, amely tetszőleges környezetfüggetlen nyelvtant $\mathcal{O}(n^3)$ időben elemez, azonban sok algoritmus létezik, amely a környezetfüggetlen nyelvek halmazának valamely részhalmazába tartozó nyelveket ennél hatékonyabban, vagy egyszerűbben implementálható módon elemzi.
+Earley 1968-ban adott algoritmust, amely tetszőleges környezetfüggetlen nyelvtant $\mathcal{O}(n^3)$ időben elemez, azonban sok algoritmus létezik, amely a környezetfüggetlen nyelvek halmazának valamely részhalmazába tartozó nyelveket ennél hatékonyabban, vagy egyszerűbben implementálható módon elemzi.
 A legfontosabb ilyen nyelvosztályok az $LR(1)$ grammatikák, az $LL(k)$ és az $LL(1)$ grammatikák osztálya.
 Az ezen nyelvosztályokat meghatározó algoritmusokkal könnyen automatizálható módon \textit{elemző táblázat}okat építhetünk a nyelvhez, amelyek lineáris időben képesek feldolgozni a bemeneti karaktersort\footnote{%
 	Ezen és egyéb elemző algoritmusok leírásáért lásd \cite[4-6.~fejezetek]{Csornyei}.
