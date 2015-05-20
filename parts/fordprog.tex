@@ -42,16 +42,14 @@ Az ezen nyelvosztályokat meghatározó algoritmusokkal könnyen automatizálhat
 Az ilyen elemző táblázatokat építő automatizáló eszközöket az iparban széles körűen használják.
 Ilyen például a híres \textit{YACC}, illetve nyílt forráskódú változata, a \textit{GNU bison} (módosított $LR(1)$ elemzők), és a modernebb, Java-alapú \textit{ANTLR} (módosított $LL(k)$ elemző).
 
+%\subsubsection{Rekurzív leszállásos elemzés}
 Az automatizált elemzőgenerátorok hasznos eszközök, de a fordítóprogramok tervezői gyakran mégis kézzel írják meg az elemzőt.
 Régi, elterjedt, bevált módszer a \textit{rekurzív leszállásos elemzés} módszere, melynek lényege, hogy a nyelvtan minden nemterminális szimbólumához a szimbúlum helyettesítési szabályát mgvalósító eljárást rendelve, egy vagy több előreolvasott szimbólum alapján döntést hozva, az implementációs programozási nyelv végrehajtási vermét használva szimulálunk veremautomatát.
+
 A rekurzív leszállásos elemező előnye a táblázatos módszerekkel szemben, hogy nagyon könnyű megvalósítani, lehetőséget ad informatív hibaüzenetek generálására, és jól olvasható is, amennyiben az elemzőt végignézve megismerhetjük a nyelvtant.
 További előny, hogy az eljárásokban megkötés nélkül ki tudjuk használni a Turing-teljes implementációs nyelv teljes eszközkészletét, vagyis a szimulált veremautomatánk kifejezőerejét tetszés szerint növelhetjük -- igaz, az implementációs komplexitás kárára.
 Rekurzív leszállásos elemzőt használ például a Lua programozási nyelv fordítóprogramja.
 
 
 
-
-
-% LL(1)
-% recdesc
 % operator problem, landin?, pratt

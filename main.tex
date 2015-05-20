@@ -1,5 +1,5 @@
 \documentclass[twoside,11pt,a4paper]{article}
-\usepackage[margin=2.5cm, bindingoffset=1.25cm]{geometry}
+\usepackage[margin=2.5cm, bindingoffset=1.5cm]{geometry}
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -52,7 +52,7 @@
    
 \begin{document}
 \pagestyle{empty}
-\pagenumbering{roman}
+%\pagenumbering{roman}
 \begin{titlepage}
 \newlength\drop
 \setlength\drop{0.08\textheight}
@@ -76,24 +76,25 @@ Dr.~Feldhoffer Gergely
 \vspace*{\drop}
 
 \end{titlepage}
-\newpage
+%\newpage
 
-\vspace*{\fill}
-\begin{center}
-A beszámoló elektronikus formában a\\
-\url{http://users.itk.ppke.hu/~sciar/onlab.pdf}\\
-címen érhető el.
-\end{center}
+%\vspace*{\fill}
+%\begin{center}
+%A beszámoló elektronikus formában a\\
+%\url{http://users.itk.ppke.hu/~sciar/onlab.pdf}\\
+%címen érhető el.
+%\end{center}
+% nobody's interested
+\null\cleardoublepage
 
-\cleardoublepage
 %\includepdf{parts/elolap.pdf}
 %\cleardoublepage
+%\setcounter{page}{1}
 \tableofcontents
-
-\newpage
+\null\cleardoublepage
 \setcounter{page}{1}
 \pagestyle{plain}
-\pagenumbering{arabic}
+%\pagenumbering{arabic}
 \section{Bevezetés}
 \label{sec:intro}
 \input{parts/intro.tex}

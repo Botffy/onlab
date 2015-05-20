@@ -53,7 +53,7 @@ A PLanG használata a tanulók számára elválaszthatatlan a grafikus futtatók
 Kétségkívül hasznos a kifejezésfát és a memóriamodellt kirajzoló modul, bár haszánalatuk nem intuitív.
 A programszerkesztő modul nagyon primitív, hiányzik a szintaxiskiemelés, zárójelpárosság-ellenőrző, undo funckionalitás, gyorsbillentyűk nincsenek.
 Az alapvető editorfunkciók közül hiányzik a tabulátor méretének megadásának lehetősége, a legutóbb szerkesztett file-ok megnyitásának lehetősége.
-A gombsorban a nagy zöld ,,Futtatás'' gomb jó használhatóságú, de például az ,,Értelmezés'' és az ,,Értelmezett program szerkesztése'' gombok közötti különbség egyáltalán nem világos.
+A gombsorban a nagy zöld ,,Futtatás'' gomb jó használhatóságú, de például a ,,Szerkesztés'' és az ,,Értelmezett program szerkesztése'' gombok közötti különbség egyáltalán nem világos.
 
 A futtatókörnyezet nem interaktív, a programok előre bekészített bemenetekkel dolgoznak, ez ellentétes a tanulók előzetes várakozásával.
 A fordítás folyamata két lépésből áll, ez is meglepetést okozhat, és növeli a nyelv viszkozitását.
@@ -63,7 +63,7 @@ Ez rendszerint megzavarja a tanulókat, magyarázatot igényel, és csökkenti a
 \begin{table}[tb]
 	\centering
 	\begin{tabular}{ r c c }
-						& \bfseries PLanG	 & \bfseries ideális \\ \hline
+						& \bfseries PLanG	 & \bfseries ideális  \\ \hline
 		\bfseries absztrakció 		&\cellcolor{red!30}nincs & alacsony \\
 		\bfseries hibák vonzása 	&\cellcolor{red!30}közepes & nagyon alacsony \\
 		\bfseries konzisztensség 	&\cellcolor{green!30}közepes & közepes  \\
@@ -106,18 +106,53 @@ Már a projekt ötletének felmerülésekor volt egy olyan hátsó szándékom, 
 Azt is eldöntöttem, hogy automatizált parser generátor használata helyett kézzel fogok rekurzív leszállásos elemzőt írni, egyrészt demonstratív jellege miatt, másrészt mert megkönnyíti az informatív hibaüzenetek generálását.
 
 Minél általánosabb fordítóprogramot akartam írni, egy  keretrendszer-félét, amely felszíni szintaxissal paraméterezhető.
-Az volt az álmom, hogy több leszármazott nyelvet kezeljen a program: a PLanGot, a PLanG apró felhasználhatósági javításokkal ellátott kiterjesztését, majd az; ráadásul azt is szerettem volna elérni, hogy a lexikális tulajdonságok minél könnyebben testreszabhatóak legyenek(\cite{Balogh12} inspirált), például azért, hogy külföldi vendéghallgatók is tudják használni a nyelvet.
+Az volt az álmom, hogy több leszármazott nyelvet kezeljen a program: a PLanGot, a PLanG apró felhasználhatósági javításokkal ellátott kiterjesztését, majd az; ráadásul azt is szerettem volna elérni, hogy a lexikális tulajdonságok minél könnyebben testreszabhatóak legyenek (\cite{Balogh12} inspirált), például azért, hogy külföldi vendéghallgatók is tudják használni a nyelvet.
 
 A fenti döntések utólagos értékeléséért lásd \aref{subsec:planres} részt.
 
 
-\subsection{Implementáció}
+\subsection{A prototípus implementációja}
 
-\begin{figure}[htb]
+A prototípus központi osztálya a rosszul elnevezett \cls{Parser}, amely létrehozásakor egy, valamely nyelv nyelvtanát enkapszuláló \cls{Grammar} objektummal paraméterezhető.
+A \cls{Parser} rendelkezik még egy \cls{Lexer} objektummal, ami a programot leíró szimbólumsorozat forrása, és egy \cls{Context} objektummal, ami a szimbólumtáblákat enkapszulálja.
+
+\begin{figure}[ht]
 	\centering
 	\resizebox{\textwidth}{!}{\input{parts/figures/system_diagram.tex}}
-	\caption{A rendszer idealizált adatfolyam diagramja.}
+	\caption{A prototípus idealizált adatfolyam diagramja.}
 \end{figure}
+
+
+\subsubsection{A nyelvtan megadása}
+A fordítóprogram által használt nyelvtant egy \cls{Grammar} objektumban adjuk meg: viszonylag szép, deklaratív szintaxissal sorolhatjuk meg a nyelv által használt lexikális elemeket a hozzájuk tartozó felszíni formákkal (ezek karaktersorozatok vagy reguláris kifejezések), beépített függvényeket, operátorokat.
+A nyelvtan helyettesítési szabályait egy rekurzív leszállásos elemző függvényeiként adjuk meg.
+
+\subsubsection{Lexikális elemzés}
+A \cls{Lexer} a forrásszöveget bontja fel szimbólumokra a \cls{Context}ben tárolt szimbólumlista alapján.
+Implementációja nagyon egyszerű: a forrásszöveg bemeneti karakterfolyamára megpróbáljuk ráilleszteni a szimbólumokat leíró reguláris kifejezéseket, majd a leghosszabb egyezést tekintjük találatnak, és ezt adjuk fel a \cls{Parser}nek.
+Ezt az implementációt eleinte ideiglenesnek szántam, de a feladathoz mérten hatékonynak és megbízhatónak bizonyult.
+
+Fontos megjegyezni, hogy a \cls{Lexer} valójában nem szimbólumokat ad vissza, hanem \cls{Token}eket.
+A \cls{Token} rekord tartalmazza a szimbólumot, a tulajdonképpeni karaktersorozatot, illetve a karaktersorozat előfordulásának helyét a szövegben.
+
+\subsubsection{Szintaktikus elemzés}
+A \cls{Parser} a szintaktikus elemzést a \cls{Grammar} \cls{S} metódusának hívásával kezdi meg, ahonnan a nyelvtan szabályfüggvényeinek rekurzív hívásaival megy tovább.
+Ezen szabályfüggvények visszatérési értéke egy \cls{Node}, azaz az absztrakt szintaxisfa egy csomópontja.
+
+A megvalósított absztrakt szintaxisfa reguláris és heterogén: ,,heterogén'' mert a csomópontok különféle típusúak (külön leszármazott osztály valósítja meg például a feltételes utasítást és a kifejezést), és ,,reguláris'' mert a csomópontokat egységes, homogén interface-en keresztül is lehet kezelni.
+
+\subsubsection{Szimbólumtábla}
+A szimbólumtáblát a \cls{Context} osztály valósítja meg. Minden nevesített szemantikai egységet (típusokat, változókat, függvényeket) egy közös LeBlanc-Cook szimbólumtáblában tárol\cite[lásd][30]{ScottProgPrag}, de heterogén interface-t biztosít.
+
+\subsubsection{Szemantikus elemzés}
+A \cls{Grammar} egy szabályfüggvénye kérheti egy \cls{Node} szemantikus ellenőrzését a rosszul elnevezett \cls{ASTTypechecker} osztálytól.
+Az \cls{ASTTypechecker} ellenőrzi az adott \cls{Node} és leszármazottai típushelyességét, és megkísérli rezolválni a függvényhívásokat.
+A prototípus kezeli a túlterhelt függvényeket: a PLanG operátorai mind túlterhelt függvényként vannak megvalósítva.
+
+\subsubsection{Interpreter}
+Az elkészült, típushelyes absztrakt szintaxisfát az \cls{ASTInterpreter} osztály segítségével tudjuk futtatni.
+Az \cls{ASTInterpreter} közvetlenül a szintaxisfát bejárva hajtja végre a programot.
+
 
 
 \subsection{A tervezési döntések utólagos értékelése} \label{subsec:planres}
@@ -133,13 +168,7 @@ A Java határozott objektumorientáltsága is gyakran nehezítette a tisztán im
 De ha már Javát használtam, sok gondot megspórolhattam volna külső könyvtárak szabadabb használatával: függőségkezelő eszközök használatával a külső könyvtárak kezelése kezdőknek sem nehéz feladat.
 Szintén érdemes lett volna kihasználni a Java 8 nyújtotta lehetőségeket.
 
-Nem volt rossz döntés viszont saját elemzőt készíteni: nem került sokkal időbe, mint egy parsergenerátor használatát tisztességesen elsajátítani, és valóban nagyobb kontrollom volt így a hibaüzenetek generálásában, és az elemzés logikai folyamatát is egyszerűsíteni tudtam.
+Nem volt rossz döntés viszont saját elemzőt készíteni: nem került sokkal időbe, mint egy parsergenerátor használatát tisztességesen elsajátítani, és valóban nagyobb kontrollom volt így a hibaüzenetek generálásában, az elemzés logikai folyamatát is egyszerűsíteni tudtam, és rengeteget tanultam.
 
 Az, hogy egyszerű fordítóprogram helyett egyfajta keretrendszert írtam komolyan megnehezítette és lassította a fejlesztést.
 Egyértelműen a túlzott generalizáció csapdájába estem, minden tekintetben célszerűbb lett volna egy csak az XPLanGot értelmező fordítóprogramot írni.
-
-%A kiterjesztett nyelv tervezésében is hasonló hibába estem, a ,,a több jobb'' hibájába\cite{McIver01}
-
-
-% more is more error in langdesign
-%
