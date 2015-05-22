@@ -3,15 +3,29 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[magyar]{babel}
+\usepackage{standalone}
+\usepackage{adjustbox}
+\usepackage{tikz}
 
+\usetikzlibrary{shapes, positioning, mindmap, arrows.meta}
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
 
+% straight from http://tex.stackexchange.com/a/55849/8785
+  \tikzset{
+    invisible/.style={opacity=0},
+    visible on/.style={alt={#1{}{invisible}}},
+    alt/.code args={<#1>#2#3}{%
+      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+    },
+  }
 \title{A PLanG programozási nyelv kiterjesztése}
 \subtitle{Önálló laboratóriumi beszámoló}
-\author{Scipiades Ármin}
+\author{Scipiades Ármin\\\bigskip Konzulens: Dr.\thinspace Feldhoffer Gergely}
 \date{2015. május 27.}
 
 \usetheme{Rochester}
 \usecolortheme{beaver}
+\setbeamertemplate{navigation symbols}{}
 
 \begin{document}
 
@@ -19,6 +33,25 @@
 
 \begin{frame}
 	\frametitle{A PLanG programozási nyelv}
+	\centering
+	\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{images/plang.pdf}
 \end{frame}
+
+\begin{frame}
+	\frametitle{A programozási nyelv felhasználói felület}	
+	\centering
+	\begin{adjustbox}{max totalsize={\textwidth}{\textheight},center}
+	\input{images/hci.tex}
+	\end{adjustbox}	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Programozási nyelvek minőségi mutatói}
+	\centering
+	\begin{adjustbox}{max totalsize={\textwidth}{\textheight},center}
+	\input{images/quality.tex}
+	\end{adjustbox}
+\end{frame}
+
 
 \end{document}

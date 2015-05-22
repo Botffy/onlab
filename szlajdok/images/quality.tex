@@ -1,0 +1,30 @@
+\begin{tikzpicture}
+	\path[
+		mindmap,
+		concept color=purple!80,
+		text=black
+	]
+		node [concept, font=\huge] {Minőség}
+		[clockwise from=0, level 1 concept/.append style={sibling angle=180}]
+		child[concept color=teal!50] {
+			node[concept, font=\large] (usability) {Hasz\-nál\-ha\-tó\-ság}
+			[clockwise from=135, level 2 concept/.append style={sibling angle=45, visible on=<3->}]
+			child { node[concept] {absztrakció} }
+			child { node[concept] {hibák vonzása} }
+			child { node[concept] {kon\-zisz\-tens\-ség} }
+			child { node[concept] {leképezés közelisége} }
+			child { node[concept] {szellemi erőfeszítés} }
+			child { node[concept] {ter\-jen\-gős\-ség} }
+			child { node[concept] {viszkozitás} }
+		}
+		child[concept color=pink] {
+			node[concept, font=\large] {Hasznosság}
+			[counterclockwise from=90, level 2 concept/.append style={sibling angle=60, visible on=<2->}]
+			child { node[concept] {ki\-fe\-je\-ző\-e\-rő} }
+			child { node[concept] {ro\-bosz\-tus\-ság} }
+			child { node[concept] {ember\-orien\-táltság} }
+			child { node[concept] {feladat\-orien\-táltság} }
+		};
+
+		\node[below=3 of usability, visible on=<3->] {Cognitive dimensions of notations (Greene 89)};
+\end{tikzpicture}
