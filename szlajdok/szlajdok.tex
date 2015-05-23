@@ -7,7 +7,7 @@
 \usepackage{adjustbox}
 \usepackage{tikz}
 
-\usetikzlibrary{shapes, positioning, mindmap, arrows.meta}
+\usetikzlibrary{shapes, positioning, mindmap, arrows.meta, backgrounds, fit}
 \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
 
 % straight from http://tex.stackexchange.com/a/55849/8785
@@ -50,6 +50,14 @@
 	\centering
 	\begin{adjustbox}{max totalsize={\textwidth}{\textheight},center}
 	\input{images/quality.tex}
+	\end{adjustbox}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Oktatási nyelvként a PLanG minőségi mutatói rosszak}
+	\centering
+	\begin{adjustbox}{max totalsize={\textwidth}{\textheight},center}
+	\input{images/bad.tex}
 	\end{adjustbox}
 \end{frame}
 
