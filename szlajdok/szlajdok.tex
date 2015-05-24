@@ -5,10 +5,12 @@
 \usepackage[magyar]{babel}
 \usepackage{standalone}
 \usepackage{adjustbox}
+\usepackage{varwidth}
 \usepackage{tikz}
 
 \usetikzlibrary{shapes, positioning, mindmap, arrows.meta, backgrounds, fit}
 \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+
 
 % straight from http://tex.stackexchange.com/a/55849/8785
   \tikzset{
@@ -61,5 +63,16 @@
 	\end{adjustbox}
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{XPLanG}
+	\centering
+	\begin{adjustbox}{max totalsize={\textwidth}{\textheight},center}
+	\input{images/xplang.tex}
+	\end{adjustbox}
+\end{frame}
+
+\begin{frame}
+	\frametitle{}
+\end{frame}
 
 \end{document}

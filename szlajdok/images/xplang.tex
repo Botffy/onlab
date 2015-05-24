@@ -1,0 +1,55 @@
+\begin{tikzpicture}[
+	box/.style = {fill=#1!20,draw=#1, rounded corners, inner sep=2mm, very thick}
+]
+\node[anchor=south west,inner sep=0] (bg) at (0,0) {\includestandalone[width=10cm]{images/cute_cloud}};
+
+\begin{scope}[x={(bg.south east)},y={(bg.north west)}]
+
+
+\node[box=blue, anchor=north west, visible on=<2->] at (-0.1,0.92) {%
+\begin{varwidth}{\linewidth}
+\begin{verbatim}
+	Függvény faktoriális (n: Egész) => Eredmény: Egész
+	  Eredmény := n
+	  ciklus amíg n>2
+	    n := n-1
+	    Eredmény := Eredmény * n
+	  ciklus_vége
+	Függvény_vége
+\end{verbatim}
+\end{varwidth}
+%
+};
+
+\node[box=green, anchor=north west, visible on=<3->] at (-0.05,0.87) {%
+\begin{varwidth}{\linewidth}
+\begin{verbatim}
+	Ha x akkor
+	  ki: "igaz ág"
+	vagy_ha y akkor
+	  ki: "elsif ág"
+	vagy_ha z akkor
+	  ki: "másik elsif ág"
+	különben
+	  ki: "else ág"
+	ha_vége
+\end{verbatim}
+\end{varwidth}
+%
+};
+
+\node[box=teal, anchor=north west, visible on=<4->] at (0,0.82) {%
+\begin{varwidth}{\linewidth}
+\begin{verbatim}
+	Ha nem x akkor
+	  hiba: "x nem igaz"
+	ha_vége
+\end{verbatim}
+\end{varwidth}
+%
+};
+
+
+\end{scope}
+
+\end{tikzpicture}

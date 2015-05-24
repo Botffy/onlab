@@ -1,4 +1,58 @@
+\begin{tikzpicture}[
+	box/.style = {fill=#1!20,draw=#1, rounded corners, inner sep=2mm, very thick}
+]
+\node[text width=10cm, opacity=0.4, anchor=south west, inner sep=0, visible on=<1->] (bg) {{\includestandalone[width=\textwidth]{images/skull_and_crossbones}}};
 
-\begin{tikzpicture}
-\node[text width=10cm, opacity=0.6] (language) {{\includestandalone[width=\textwidth]{images/skull_and_crossbones}}};
+\begin{scope}[x={(bg.south east)},y={(bg.north west)}]
+
+\node[box=yellow, anchor=north west, visible on=<2->] at (0.37,0.85) {%
+\begin{varwidth}{\linewidth}
+\begin{verbatim}
+Változók: a, b: Szöveg
+  ...
+  Ki: a @ b
+\end{verbatim}
+\end{varwidth}
+%
+};
+
+\node[box=red, anchor=north west, visible on=<3->] at (-0.1,0.92) {%
+\begin{varwidth}{\linewidth}
+\begin{verbatim}
+	ha x akkor
+	  ** x-re vonatkozó helyes viselkedés
+    ha y akkor
+      ** y-ra vonatkozó helyes viselkedés
+    különben
+      ki: "Hiba: y nem igaz"
+	különben
+	  ki: "Hiba: x nem igaz"
+	ha_vége
+\end{verbatim}
+\end{varwidth}
+%
+};
+
+
+\node[box=orange, anchor=north west, visible on=<4->] at (0.25,0.79) {%
+\begin{varwidth}{\linewidth}
+\begin{verbatim}
+	Ha x akkor
+	  ki: "igaz ág"
+	különben
+	  ha y akkor
+	    ki: "elsif ág"
+	  különben
+	    ha z akkor
+	      ki: "másik elsif ág"
+	    ha_vége
+	  ha_vége
+	  ki: "else ág"
+	ha_vége
+\end{verbatim}
+\end{varwidth}
+%
+};
+
+\end{scope}
 \end{tikzpicture}
