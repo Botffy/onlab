@@ -16,39 +16,49 @@ Változók: a, b: Szöveg
 %
 };
 
-\node[box=red, anchor=north west, visible on=<3->] at (-0.1,0.92) {%
-\begin{varwidth}{\linewidth}
-\begin{verbatim}
-	ha x akkor
-	  ** x-re vonatkozó helyes viselkedés
-    ha y akkor
-      ** y-ra vonatkozó helyes viselkedés
-    különben
-      ki: "Hiba: y nem igaz"
-	különben
-	  ki: "Hiba: x nem igaz"
-	ha_vége
-\end{verbatim}
-\end{varwidth}
-%
-};
 
-
-\node[box=orange, anchor=north west, visible on=<4->] at (0.25,0.79) {%
+\node[box=orange, anchor=north west, visible on=<3->] at (0.25,0.79) {%
 \begin{varwidth}{\linewidth}
 \begin{verbatim}
 	Ha x akkor
 	  ki: "igaz ág"
 	különben
 	  ha y akkor
-	    ki: "elsif ág"
+	    ki: "nem x és y"
 	  különben
 	    ha z akkor
-	      ki: "másik elsif ág"
+	      ki: "nem x és nem y és z"
+      különben
+        ki: "semmi nem igaz"
 	    ha_vége
 	  ha_vége
-	  ki: "else ág"
 	ha_vége
+\end{verbatim}
+\end{varwidth}
+%
+};
+
+\node[box=red, anchor=north west, visible on=<4->] at (-0.1,0.92) {%
+\begin{varwidth}{\linewidth}
+\begin{verbatim}
+  ha x akkor
+    ** x-re vonatkozó helyes viselkedés
+    ha y akkor
+      ** y-ra vonatkozó helyes viselkedés
+    különben
+      ki: "Hiba: y nem igaz"
+  különben
+    ki: "Hiba: x nem igaz"
+  ha_vége
+\end{verbatim}
+\end{varwidth}
+%
+};
+
+\node[box=purple, anchor=north west, visible on=<5->] at (0.1,0.65) {%
+\begin{varwidth}{\linewidth}
+\begin{verbatim}
+  ...függvény meg egyáltalán nincs...
 \end{verbatim}
 \end{varwidth}
 %

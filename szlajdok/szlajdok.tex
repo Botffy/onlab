@@ -1,4 +1,6 @@
-\documentclass{beamer}
+\documentclass[xcolor=table]{beamer}
+\usepackage{etex}
+\usepackage[absolute,overlay]{textpos}
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -11,6 +13,8 @@
 \usetikzlibrary{shapes, positioning, mindmap, arrows.meta, backgrounds, fit}
 \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
 
+\setbeamercolor{framesource}{fg=gray}
+\setbeamerfont{framesource}{size=\tiny}
 
 % straight from http://tex.stackexchange.com/a/55849/8785
   \tikzset{
@@ -29,6 +33,12 @@
 \usecolortheme{beaver}
 \setbeamertemplate{navigation symbols}{}
 
+\newcommand{\source}[1]{\begin{textblock*}{4cm}(8.7cm,9cm)
+    \begin{beamercolorbox}[ht=0.5cm,right]{framesource}
+        \usebeamerfont{framesource}\usebeamercolor[fg]{framesource}{#1}
+    \end{beamercolorbox}
+\end{textblock*}}
+
 \begin{document}
 
 \frame{\titlepage}
@@ -37,6 +47,22 @@
 	\frametitle{A PLanG programozási nyelv}
 	\centering
 	\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{images/plang.pdf}
+\end{frame}
+
+\begin{frame}
+	\frametitle{A PLanG hiányosságai}
+	\centering
+	\begin{adjustbox}{max totalsize={\textwidth}{\textheight},center}
+	\input{images/bad.tex}
+	\end{adjustbox}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Objektív értékelés?}
+	\centering
+	\includegraphics{images/subjective_kloran.png}
+	
+	\source{Michael Kloran illusztrációja}
 \end{frame}
 
 \begin{frame}
@@ -56,12 +82,38 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Oktatási nyelvként a PLanG minőségi mutatói rosszak}
+	\frametitle{A PLanG minőségi mutatói}
+	\centering
+	\begin{tabular}{ r c c }
+\bfseries kognitív dimenzió						& \bfseries PLanG	 & \bfseries ideális oktatási nyelv  \\
+\rowcolor{red!30}		\bfseries absztrakció 		&nincs & alacsony \\
+\rowcolor{red!30}		\bfseries hibák vonzása 	&közepes & nagyon alacsony \\
+\rowcolor{green!30}		\bfseries konzisztensség 	&közepes & közepes  \\
+\rowcolor{red!30}		\bfseries leképezés közelisége &közepes-alacsony & nagyon magas \\
+\rowcolor{red!30}		\bfseries szellemi erőfeszítés &közepes & alacsony \\
+\rowcolor{yellow!30}		\bfseries szerepkifejezés &közepes-magas	& magas \\
+\rowcolor{yellow!30}		\bfseries terjengősség &alacsony-közepes	& közepes \\
+\rowcolor{red!30}		\bfseries viszkozitás &közepes-magas	& alacsony
+	\end{tabular}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Parametrizálható fordítóprogram}
 	\centering
 	\begin{adjustbox}{max totalsize={\textwidth}{\textheight},center}
-	\input{images/bad.tex}
+	\input{images/paramfordprog.tex}
 	\end{adjustbox}
 \end{frame}
+
+\begin{frame}
+	\frametitle{A prototípus adatfolyam diagramja}
+	\centering
+	\begin{adjustbox}{max totalsize={\textwidth}{\textheight},center}
+	\input{images/system_diagram.tex}
+	\end{adjustbox}
+\end{frame}
+
 
 \begin{frame}[fragile]
 	\frametitle{XPLanG}
@@ -72,7 +124,12 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{}
+	\frametitle{Összegzés}
+	\begin{itemize}
+		\item Minőségi mutatók programozási nyelvekhez
+		\item A PLanG minőségi mutatói nem túl jók
+		\item XPLanG: alprogramok, többágú elágazás, hibakezelés
+		\item Nyelvtannal paraméterezhető fordítóprogram: sok lehetőség
+	\end{itemize}
 \end{frame}
-
 \end{document}

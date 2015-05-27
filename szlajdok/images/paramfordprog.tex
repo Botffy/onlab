@@ -1,0 +1,24 @@
+\begin{tikzpicture}[node distance=2cm,
+	every node/.style={font=\bfseries\sffamily},
+	clas/.style={rectangle, rounded corners, draw, fill=blue!10, inner sep=1pt, text width=4cm, text badly centered, minimum height=1.2cm},
+	arr/.style={->, >={Latex[length=0.4cm]}}
+	]
+
+\node (1es) {PLanG program};
+\node[below of=1es] (2es) {XPLanG 1 program};
+\node[below of=2es] (3as) {XPLanG 2 program};
+\node[below of=3as] (4es) {XPLanG 3 program};
+
+\node[clas, below right=0cm and 4cm of 2es] (interpreter) {Fordítóprogram};
+
+\node[right=2.6cm of interpreter] (out) {Absztrakt szintaxisfa};
+
+\path[arr]
+(1es) edge[out=0, in=180] (interpreter)
+(2es) edge[out=0, in=180] (interpreter)
+(3as) edge[out=0, in=180] (interpreter)
+(4es) edge[out=0, in=180] (interpreter)
+(interpreter) edge (out);
+
+
+\end{tikzpicture}
